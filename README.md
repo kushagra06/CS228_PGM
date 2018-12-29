@@ -60,4 +60,4 @@ BOOK : [Probabilistic Graphical Models: Principles and Techniques by Daphne Koll
 
 # FINAL EXAM
 
-[2017 Final]() , [2016 Final]() , [2009 Final](https://github.com/SKKSaikia/CS228_PGM/blob/master/exam/CS228%20WINTER%202009%20FINAL%20SOLUTION%20(1)%20Using%20...%20-%20Stanford%20AI%20Lab.pdf) , [2008 Final]() , [2007 Final](https://github.com/SKKSaikia/CS228_PGM/blob/master/exam/final040407.pdf), [2006 Final]() 
+[2016 Final]() , [2009 Final](https://github.com/SKKSaikia/CS228_PGM/blob/master/exam/CS228%20WINTER%202009%20FINAL%20SOLUTION%20(1)%20Using%20...%20-%20Stanford%20AI%20Lab.pdf) , [2008 Final]() , [2007 Final](https://github.com/SKKSaikia/CS228_PGM/blob/master/exam/final040407.pdf), [2006 Final]() 

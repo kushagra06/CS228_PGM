@@ -22,7 +22,7 @@ BOOK : [Probabilistic Graphical Models: Principles and Techniques by Daphne Koll
 
 <b> Homework (70%) + Final Exam (30%) </b>| Homework - Theoretical + Programming | Topics in [book](https://github.com/SKKSaikia/CS228_PGM/blob/master/book.PNG)
 
-# [Homework](https://github.com/SKKSaikia/CS228_PGM/tree/master/hw)
+# [HomeworkS](https://github.com/SKKSaikia/CS228_PGM/tree/master/hw)
 
 - [Homework 1](https://github.com/SKKSaikia/CS228_PGM/blob/master/hw/hw1.pdf) : [Programming](https://github.com/SKKSaikia/CS228_PGM/tree/master/hw/hw1)
 - [Homework 2](https://github.com/SKKSaikia/CS228_PGM/blob/master/hw/hw2.pdf) : [Programming](https://github.com/SKKSaikia/CS228_PGM/tree/master/hw/hw2)
@@ -69,4 +69,4 @@ BOOK : [Probabilistic Graphical Models: Principles and Techniques by Daphne Koll
 
 # FINAL EXAM
 
-[2016 Final](https://github.com/SKKSaikia/CS228_PGM/blob/master/exam/final16_with_sols.pdf) , [2009 Final](https://github.com/SKKSaikia/CS228_PGM/blob/master/exam/CS228%20WINTER%202009%20FINAL%20SOLUTION%20(1)%20Using%20...%20-%20Stanford%20AI%20Lab.pdf) , [2008 Final](https://github.com/SKKSaikia/CS228_PGM/blob/master/exam/final-08.pdf) , [2007 Final](https://github.com/SKKSaikia/CS228_PGM/blob/master/exam/final040407.pdf), [2006 Final](https://github.com/SKKSaikia/CS228_PGM/blob/master/exam/final-06.pdf) 
+[2016 Final](https://github.com/SKKSaikia/CS228_PGM/blob/master/exam/final16_with_sols.pdf) , [2009 Final](https://github.com/SKKSaikia/CS228_PGM/blob/master/exam/CS228%20WINTER%202009%20FINAL%20SOLUTION%20(1)%20Using%20...%20-%20Stanford%20AI%20Lab.pdf) , [2008 Final](https://github.com/SKKSaikia/CS228_PGM/blob/master/exam/final-08.pdf) , [2007 Final](https://github.com/SKKSaikia/CS228_PGM/blob/master/exam/final040407.pdf), [2006 Final](https://github.com/SKKSaikia/CS228_PGM/blob/master/exam/final-06.pdf) | My Solution - [HOMEWORKS](https://github.com/SKKSaikia/CS228_PGM/blob/master/hw/SOLUTION.MD) , [EXAMS](https://github.com/SKKSaikia/CS228_PGM/blob/master/exam/SOLUTION.MD)

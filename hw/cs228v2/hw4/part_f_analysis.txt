@@ -1,0 +1,9 @@
+The histograms seem to be rougly the same.
+Mean black pixel count is 56.9% in the case of 10% error rate and 57.7% in the
+case of 20% error rate.
+
+Given error rates of 0.6% and 1% respectively (which can explain at most a
+56.9% * 0.004 ~= 0.23% difference out of 57.7% - 56.9% = 0.8% difference), it
+seems that most of Z frequency variance comes from sampling randomness, not
+noise randomness. Which explains the similarity of the
+histograms.

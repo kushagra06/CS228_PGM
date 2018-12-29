@@ -1,0 +1,12 @@
+All three methods seem to be converging to the same general region of the
+posterior.
+
+The burn-in period is sufficient for 'same' and 'rand' methods (even somewhat
+excessive), but insufficient for 'neg' method.
+
+There is some fluctuation in energy levels, but that fluctuation is roughly
+around the same energy level. The chain does not seem to be stuck (since it
+jumps around in adjacent iterations, which is most clear on the
+"plot_c_same.png" plot because of scale), but it fluctuates in the same general
+energy level region, since significantly deviating outcomes are exponentially
+less likely.

@@ -1,0 +1,17 @@
+CS 228, HW2, programming assignment
+Ivan Bogatyy, bogatyy@stanford.edu, bogatyi@gmail.com
+Homework is 1 day late
+
+My solution implements a version of message passing / variable elimination
+that uses the fact that our MRF is a tree.
+We run send messages up and down parent-child edges, arriving at an
+asymptotically optimal variable ordering.
+
+I implemented Factor.* methods in factors.py, but did not use clique_tree.py
+at all.
+Instead, I changed binary_tree.py so that the nodes hold some extra information.
+Most of the model itself is implemented in mrf_tree.py
+
+For your convenience, the output from solution.py was saved into output_ABC.txt
+(solutions for parts A, B, C) and output_DEFG.txt (solutions for parts D,E,F,G)
+and slightly formatted.

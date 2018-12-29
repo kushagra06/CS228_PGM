@@ -1,0 +1,2 @@
+Comparison for part_d_comparison_10.png: error rate before 0.0999058380414, error rate after 0.00612052730697
+Comparison for part_d_comparison_20.png: error rate before 0.201494821092, error rate after 0.0105696798493

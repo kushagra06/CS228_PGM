@@ -1,0 +1,4 @@
+Doing part (a): Should see 0.0, 0.0, >0.0
+
+(array([ 0.]), array([ 0.]), array([  3.12500000e-07]))
+

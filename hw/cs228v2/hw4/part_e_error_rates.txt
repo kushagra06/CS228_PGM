@@ -1,0 +1,7 @@
+Comparison for part_e_comparison_10.png: error rate before 0.0999058380414, error rate after 0.00682674199623
+Comparison for part_e_comparison_20.png: error rate before 0.201494821092, error rate after 0.0213512241055
+
+With regard to "is this because you have a clever algorithm or just because the
+problem is easy" - seems like a bit of both. For 10% error rate, the denoised
+images are of the same quality. For 20% error rate, Gibbs sampling outperforms
+dumb majority voting 2x.

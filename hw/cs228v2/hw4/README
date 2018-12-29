@@ -1,0 +1,11 @@
+Ivan Bogatyy, bogatyy@stanford.edu, bogatyi@gmail.com, HW4
+
+The submission contains both code, files/plots and the written answers of the
+assignments (c) - (f).
+Some functions are refactored from starter code. For example,
+get_posterior_by_sampling() returns Z frequencies as a list, not a dict (so that
+plt.hist() can be used), and the image denoising from posteriors happens in a
+separate function.
+
+orig.txt, noisy_10.txt and noisy_20.txt had to be removed from the submission
+(despite being used by submission.py) because of submission size limits.

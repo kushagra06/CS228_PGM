@@ -1,0 +1,67 @@
+PART D
+
+LogLikelihood and corresponding vector: -17.7035792465 {3: 1, 5: 1, 8: 0, 10: 0, 11: 0, 14: 0, 15: 0, 17: 0, 19: 0}
+Likelihood of that vector estimated naively: 2.04848705239e-08 (same)
+
+Let us recall the marginal probabilities from part C:
+
+3 [ 0.01097032  0.80709913  0.002892    0.17903854] sum = 1.0
+5 [ 0.05363426  0.84801463  0.01202623  0.08632488] sum = 1.0
+8 [ 0.31047568  0.25534941  0.40861052  0.02556439] sum = 1.0
+10 [ 0.68168057  0.15212077  0.14858574  0.01761291] sum = 1.0
+11 [ 0.6494745   0.19702325  0.12504436  0.0284579 ] sum = 1.0
+14 [ 0.97700779  0.00136516  0.0205555   0.00107156] sum = 1.0
+15 [ 0.82186714  0.02269878  0.14744669  0.00798738] sum = 1.0
+17 [ 0.65637297  0.00577348  0.33337198  0.00448156] sum = 1.0
+19 [ 0.81373552  0.00619151  0.17133829  0.00873468] sum = 1.0
+
+This way, we can compare the most likely marginal value vs joint most likely:
+ 3 - C - C
+ 5 - C - C
+ 8 - G - A
+10 - A - A
+11 - A - A
+14 - A - A
+15 - A - A
+17 - A - A
+19 - A - A
+
+While they mostly match, they are not exactly the same (difference in node 8),
+which is also a possible solution to problem 5.
+
+
+--------------------------------------------------------------------------------
+
+PART E
+
+Total loglikelihood: -9379.70771125
+
+--------------------------------------------------------------------------------
+
+PART F
+
+Alternative tree total loglikelihood: -9474.43836219
+
+The first model fits the data better.
+
+--------------------------------------------------------------------------------
+
+PART G
+
+Option 1 - bruteforce. We cannot bruteforce all possible phylogeny trees (it
+is easy to show their number is exponential).
+
+Option 2 - conjectures using prior knowledge.
+We can rely on human expertise to create several possible options and
+discriminate between those based on data (which seems feasible since
+at least the lower junctures in the tree can be surmised with reasonable
+confidence, e.g. human-baboon, rat-mouse).
+
+Option 3 - greedy linking (aka hierarchical clustering).
+Without any prior knowledge, but with enough data, a greedy algorithm seems
+likely to arrive at an optimal solution. We build the tree from the bottom.
+At each step, we define a similarity metric on all nodes (animals or ancestors)
+that currently do not have parents. That similarity is the multiplication of
+transition probabilities for all characters these two nodes differ in.
+Then we link together two most similar nodes, replacing them with their common
+parent, and repeat the algorithm until there is just the root node left.

@@ -1,0 +1,780 @@
+Doing part (f)
+Source image:
+x x x x x x x x x x x x x x x x x x x x x   x x x x x x x x x                  
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x                
+x x x x x x x x x x x x x x x x x x x x x x x x x             x x              
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x   x x              
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x   x x x x x x x x
+x x x       x x x x x x x x x x     x x x x x x x x x x x x x x x x x x x x x x
+x x             x x x x x x x       x x x x x x x x x x x x x x x x x          
+                                    x x x x x x x x x x x x x x x x x   x x x  
+              x x                     x x x x x x x x x x x x x x x x x x x x x
+              x x x                     x x x x x x x x x x x x x x x x x x x x
+            x x x x               x x       x x x x x x x x x x x x x x x x x x
+            x x x x             x x x x                 x x x x x x x x x x x x
+            x x x x             x x x x                 x x x x x x x x x x x x
+            x x x x           x x x x                     x x x x x x x x x x x
+x           x x x x         x x x x x                     x x x x x x x x x x x
+x x         x x x x         x x x x x                       x x x x x x x x x x
+x x         x x x x       x x x x x                 x x x       x x x x x x x x
+x x x                     x x x x x               x x x x x         x x x      
+x x       x x x x x x x       x x             x x x x x                        
+    x x x x x x x x x x x x x             x x x x x x                          
+  x x x x x x x x x x x x x x x         x x x x x x                            
+x x x x x x x x x x x x x x x x x x     x x x x x                              
+x x x x x x x x x x x x x x x x x x x   x x x x                                
+x x x x x x x x x x x x x x x x x x x x   x x                                  
+x x x x x x x x x x x x x x x x x x x x                                        
+x x x x x x x x x x x x x x x x x x x x x         x x x x x x x x x x x x x x x
+              x x x             x x x x x x   x x x x x x x x x x x x x x x x x
+x x         x x x x           x   x x x x x   x x x x x x x x x x x x x x x x x
+x x       x x x x x x x       x x x x x x x     x x x x x x x x x x x x x x x  
+x x x x x x x x x x x x x x x x x x x x x x x   x x x                          
+x x x x x x x x x x x x x x x x x x x x x x x                                  
+x x x x x x x x x x x x x x x x x x x x x x x                                  
+x x x x x x         x x x x x x x x x x x x x                                  
+x x x x x x x x x x x x x x x x x x x x x x x                                  
+      x x x x x x x             x x x x x x x                                  
+x x         x                         x x         x x x x x                    
+x x x x x         x x x x x x x x           x x x x x x x x x x x         x x x
+x x x x x x     x x x x x x x x x x x       x x x x x x x x x x x x       x x x
+x x x x x x       x x x x x x x x x x x       x x x x x x x x x x x x     x x x
+x x x x x x x     x x x x x x x x x x x x     x x x x     x x x x x x x     x x
+
+----------------------------------------
+Image after 0 iterations of LBP
+x x x x x x   x x x x x x x x x x x x x x   x x x x x x x x x               x  
+x x x x x x   x x x   x x x x x x x x x x x x x x x x x x x x x         x      
+x x x x x x x x x   x x x x x x x x x x x x   x x             x x              
+x x x   x x x x x x x x x x x x x x x x x x x x     x x x x   x x   x          
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x   x     x x x x x x x
+x x x x   x x x x x x x   x x x     x x   x x x x x x x x x x x x   x x x x   x
+x x             x x x x x x x       x x x x x x x x x x x x x x x x x x        
+x             x         x   x       x x x x x x x x x x x x x x x x x     x x x
+    x         x x                     x x x   x x x x x x x x x x   x x x x x x
+              x x x                     x   x x x x x x x x x x x x x x x x   x
+            x x x x               x x       x x x x x x x x x   x x x x x x x x
+            x x x x             x x x x           x     x x x x x x x x x x x x
+    x       x x x x             x x x x                 x x x x x x x x x x x x
+            x x x x           x x x x                     x x x   x x x   x x x
+x           x x x x         x x x x x                 x   x x x x x x x x x x x
+x x         x x x x         x x x x x   x         x             x x x x x x x x
+x x         x x x x       x x x   x           x     x x   x   x x x x x x   x x
+x x x                 x   x x x x x             x x x x x x           x x   x  
+x x       x x x x x x x       x x             x x x   x     x                  
+    x   x x x x   x x x x x x             x x x x x x   x                 x x  
+  x x x x x x x x x x x x x x x     x x x x x   x x                            
+x x x x   x x x x x x x x x x x   x     x x x x x                              
+x   x x x x x x x x x x x x x x x x x   x x x x                                
+x   x x x x x x x x x x   x x x x x x x   x x                   x              
+x x x x   x x x x x x x x x x x x x x x                                     x  
+x x x x x x x x x x x x x x x x x x x x       x   x x x x x   x x x   x x   x x
+      x       x x x             x x x x   x   x x x x x x x x x x x x x x x x x
+x x           x x x           x   x x x x x   x x x x x x x x x x x   x x x x x
+x x       x x x x x x x       x   x x   x x       x x x x x x x x x x x x x x  
+x x x x x x x x x x x x   x   x x x x x x   x   x x x             x            
+x x x x x x x x x x x x x x x x x x x x x x x                   x     x   x    
+x x x x x x x x x x x x x x x x x x x x x x x       x                          
+x x x x x x         x x x x x x x x x x x x x                                 x
+x x x x x x x x x x   x x x x x   x x x x x x                                  
+      x x x x x x x             x   x x x x x                   x              
+x x         x                                       x x x                      
+x x x x x   x   x x x x   x x x x           x x x x x x x x x   x     x   x x x
+x x x x x x     x x x x   x x x   x x x     x x x x x x x x x x x   x     x x x
+  x x x x x       x x x x x x x x x x x     x x x x x x x x x   x x x     x x x
+x x x x x x         x x x x x x x x x x x     x x x x     x x x x x x x     x x
+
+----------------------------------------
+Image after 1 iterations of LBP
+x x x x x x   x x x x x x x x x x x x x x   x x x x x x x x x               x  
+x x x x x x   x x x   x x x x x x x x x x x x x x x x x x x x x         x      
+x x x x x x x x x   x x x x x x x x x x x x   x x             x x              
+x x x   x x x x x x x x x x x x x x x x x x x x     x x x x   x x   x          
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x   x     x x x x x x x
+x x x x   x x x x x x x   x x x     x x   x x x x x x x x x x x x   x x x x   x
+x x             x x x x x x x       x x x x x x x x x x x x x x x x x x        
+x             x         x   x       x x x x x x x x x x x x x x x x x     x x x
+    x         x x                     x x x   x x x x x x x x x x   x x x x x x
+              x x x                     x   x x x x x x x x x x x x x x x x   x
+            x x x x               x x       x x x x x x x x x   x x x x x x x x
+            x x x x             x x x x           x     x x x x x x x x x x x x
+    x       x x x x             x x x x                 x x x x x x x x x x x x
+            x x x x           x x x x                     x x x   x x x   x x x
+x           x x x x         x x x x x                 x   x x x x x x x x x x x
+x x         x x x x         x x x x x   x         x             x x x x x x x x
+x x         x x x x       x x x   x           x     x x   x   x x x x x x   x x
+x x x                 x   x x x x x             x x x x x x           x x   x  
+x x       x x x x x x x       x x             x x x   x     x                  
+    x   x x x x   x x x x x x             x x x x x x   x                 x x  
+  x x x x x x x x x x x x x x x     x x x x x   x x                            
+x x x x   x x x x x x x x x x x   x     x x x x x                              
+x   x x x x x x x x x x x x x x x x x   x x x x                                
+x   x x x x x x x x x x   x x x x x x x   x x                   x              
+x x x x   x x x x x x x x x x x x x x x                                     x  
+x x x x x x x x x x x x x x x x x x x x       x   x x x x x   x x x   x x   x x
+      x       x x x             x x x x   x   x x x x x x x x x x x x x x x x x
+x x           x x x           x   x x x x x   x x x x x x x x x x x   x x x x x
+x x       x x x x x x x       x   x x   x x       x x x x x x x x x x x x x x  
+x x x x x x x x x x x x   x   x x x x x x   x   x x x             x            
+x x x x x x x x x x x x x x x x x x x x x x x                   x     x   x    
+x x x x x x x x x x x x x x x x x x x x x x x       x                          
+x x x x x x         x x x x x x x x x x x x x                                 x
+x x x x x x x x x x   x x x x x   x x x x x x                                  
+      x x x x x x x             x   x x x x x                   x              
+x x         x                                       x x x                      
+x x x x x   x   x x x x   x x x x           x x x x x x x x x   x     x   x x x
+x x x x x x     x x x x   x x x   x x x     x x x x x x x x x x x   x     x x x
+  x x x x x       x x x x x x x x x x x     x x x x x x x x x   x x x     x x x
+x x x x x x         x x x x x x x x x x x     x x x x     x x x x x x x     x x
+
+----------------------------------------
+Image after 2 iterations of LBP
+x x x x x x   x x x x x x x x x x x x x x   x x x x x x x x x         x        
+x x x x   x   x x x x x x x x x x x   x x x x x x x x x x x x x         x      
+x x x x x x x x x x x x   x x x x x x x x x x x x             x x              
+x x x x x x x x x x x x x   x x x x x x x x x x     x x x x   x x   x          
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x     x x x x x x x
+x x x x     x x x x x x x x x x     x x x x x x x x x x x x x x x x x x x x   x
+x x             x x x x x x x       x x x x x x x x x x x x x x x x x x        
+              x             x       x x x x x x x x x x x x x x x   x   x x x  
+              x x                     x x x   x x x x   x x x x x   x x x   x x
+              x x x                     x   x x x x x x x x x x x x x   x x   x
+            x x x x   x           x x       x x x x x x x x x   x x x x x x x x
+            x x x x             x x x x           x       x x x x x x x x x x x
+            x x x x             x x x x                 x x x x x x x x x x x x
+            x x x x           x x x x                     x x x x x x x   x x x
+x           x x x x         x x x x x                 x   x x x x x x x   x x x
+x x         x x x x         x x x x x             x         x   x x x x x x x x
+x x         x x x x       x x x x x                 x x   x   x x x x x x x x x
+x x x                     x x x x x               x x x x x           x x      
+x x       x x x x x x x         x       x     x x x   x                        
+    x   x x x x   x x x x x               x x x x x x x x                 x x  
+  x x x x x x x x x x x x x x x         x x x   x x                            
+x x x x   x x x x x x x x x x x   x     x x x x x                              
+x   x x x x x x x x x x x x x x x x x   x x x x                                
+x   x x x x x x x x x x   x x x x x x x   x x                                  
+x x x x   x x x x x x x x x x x x x   x                                     x  
+x x x x x x x   x x x x x x x x x x x x           x x x x x   x x x x   x x x x
+              x x x             x x x x x x   x x x x x x x x x x x x x x x x x
+x x         x x x x           x   x x x x x   x x x x x x x x x x x   x x   x x
+x x       x x x x x x x       x   x x   x x       x x x x x x x x x x x x x x  
+x x x x x x x x x x x x x x x x x x x x x x x   x x x             x            
+x x x x x x x x x x x x x x x x x x x x x x x                   x         x    
+x x x x x x x x x x x x x x x x x x x x x x x   x   x                          
+x x x x x x         x x x x x x x x x x x x x                                 x
+x   x x x x x x x x   x x   x x   x x x x x x   x                              
+      x x x x x x x             x   x x x x x                 x                
+x x         x                         x x         x x x x                      
+x x x x x   x   x x x x   x x x x           x x x x x x x x x   x     x   x x x
+x x x x x x     x x x x   x x x   x x       x x x   x x x x x x x   x     x x x
+x x x x x x       x x x x x x x x x x x       x x x x x x x x   x x x     x x x
+x x x x x x       x x x   x x x x x x x x     x x x x     x x x x x x x     x x
+
+----------------------------------------
+Image after 3 iterations of LBP
+x x x x x x   x x x x x x x x x x x x x x   x x x x x x x x x         x        
+x x x x   x   x x x x x x x x x x x   x x x x x x x x x x x x x         x      
+x x x x x x x x x x x x   x x x x x x x x x x x x             x x              
+x x x x x x x x x x x x x   x x x x x x x x x x     x x x x   x x   x          
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x     x x x x x x x
+x x x x     x x x x x x x x x x     x x x x x x x x x x x x x x x x x x x x   x
+x x             x x x x x x x       x x x x x x x x x x x x x x x x x x        
+              x             x       x x x x x x x x x x x x x x x   x   x x x  
+              x x                     x x x   x x x x   x x x x x   x x x   x x
+              x x x                     x   x x x x x x x x x x x x x   x x   x
+            x x x x   x           x x       x x x x x x x x x   x x x x x x x x
+            x x x x             x x x x           x       x x x x x x x x x x x
+            x x x x             x x x x                 x x x x x x x x x x x x
+            x x x x           x x x x                     x x x x x x x   x x x
+x           x x x x         x x x x x                 x   x x x x x x x   x x x
+x x         x x x x         x x x x x             x         x   x x x x x x x x
+x x         x x x x       x x x x x                 x x   x   x x x x x x x x x
+x x x                     x x x x x               x x x x x           x x      
+x x       x x x x x x x         x       x     x x x   x                        
+    x   x x x x   x x x x x               x x x x x x x x                 x x  
+  x x x x x x x x x x x x x x x         x x x   x x                            
+x x x x   x x x x x x x x x x x   x     x x x x x                              
+x   x x x x x x x x x x x x x x x x x   x x x x                                
+x   x x x x x x x x x x   x x x x x x x   x x                                  
+x x x x   x x x x x x x x x x x x x   x                                     x  
+x x x x x x x   x x x x x x x x x x x x           x x x x x   x x x x   x x x x
+              x x x             x x x x x x   x x x x x x x x x x x x x x x x x
+x x         x x x x           x   x x x x x   x x x x x x x x x x x   x x   x x
+x x       x x x x x x x       x   x x   x x       x x x x x x x x x x x x x x  
+x x x x x x x x x x x x x x x x x x x x x x x   x x x             x            
+x x x x x x x x x x x x x x x x x x x x x x x                   x         x    
+x x x x x x x x x x x x x x x x x x x x x x x   x   x                          
+x x x x x x         x x x x x x x x x x x x x                                 x
+x   x x x x x x x x   x x   x x   x x x x x x   x                              
+      x x x x x x x             x   x x x x x                 x                
+x x         x                         x x         x x x x                      
+x x x x x   x   x x x x   x x x x           x x x x x x x x x   x     x   x x x
+x x x x x x     x x x x   x x x   x x       x x x   x x x x x x x   x     x x x
+x x x x x x       x x x x x x x x x x x       x x x x x x x x   x x x     x x x
+x x x x x x       x x x   x x x x x x x x     x x x x     x x x x x x x     x x
+
+----------------------------------------
+Image after 5 iterations of LBP
+x x x x x x x x x x x x x x x x x x x x x   x x x x x x x x x                  
+x x x x x x   x x x x x x x x x x x   x x x x x x x x x x x x x         x      
+x x x   x x x x x x x x   x x x x x x x x x x x x             x x              
+x x x x x x x x x x x x x x x x x x x x x x x x   x x x x x   x x         x    
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x     x x x x x x x
+x x x x     x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x   x
+x x             x x x x x x x       x x x x x x x x x x x x x x x x x          
+              x             x       x x x x x x x x x x x x x x x   x   x x x  
+            x x x                     x x x x x x x x x x x x x x   x x x   x x
+              x x x                     x   x x x x x x x x x x x x x x x x   x
+            x x x x   x           x x       x x x x x x x x x   x x x x x x x x
+            x x x x             x x x x           x     x x x x x x x x x x x x
+            x x x x             x x x x                 x x x x x x x   x x x x
+            x x x x           x x x x                     x x x   x x x   x x x
+x           x x x x         x x x x x                 x   x x x x x x x x x x x
+x x         x x x x         x x x x x             x             x x x x x x x x
+x x         x x x x   x   x x x x x                 x x x       x x x x x x x x
+x x x                     x x x x x               x x x x x         x x x   x  
+x x       x x x x x x x       x x             x x x x x                        
+    x   x x x x x x x x x x x             x x x x x x                     x    
+  x x x x x x x x x x x x x x x         x x x x x x                            
+x x x x   x x x x x x x x x x x   x     x x x x x                              
+x   x x x x x x x x x x x x x x x x x   x x x x                                
+x   x x x x x x x x x x   x x x x x x x   x x                     x            
+x x x x   x x x x x x x x x x x x x x x                                     x  
+x x x x x x x x x x x x x x x x x x x x x         x x x x x   x x x x x x x x x
+      x       x x x             x x x x x x   x x x x x x x x x x x x x x x x x
+x x         x x x x           x   x x x x x   x x x x x   x x x x x   x x x x x
+x x       x x x x x x x       x   x x   x x     x x x x x x x x x x x x x x x  
+x   x x x x x x x x x x   x   x x x x x x   x   x x x             x            
+x x x x x x x x x x x x x x x x x x x x x x x                   x         x    
+x x   x x x x x x x x x x x x x x x x x x x x                                  
+x x x x x x         x x x x x x x x x x x   x                                 x
+x   x x x x x x x x   x x x x x   x x x x x x                                  
+      x x x x x x x             x   x x x x x                                  
+x x         x                         x x         x x x x x                    
+x x x x x       x x x x x x x x x           x x x x x x x x x   x     x   x x x
+x x x x x x     x x x x   x   x x x x       x x x x x x x x x x x         x x x
+x x x x x x       x x x x x x x x x x x       x x x x x x x x x x x x     x x x
+x x x x x x x     x x x x x x x x x x x x     x x x x     x x x x x x x     x x
+
+----------------------------------------
+Image after 10 iterations of LBP
+x x x x x x x x x x x x x x x x x x x x x   x x x x x x x x x   x              
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x         x      
+x x x x x x x x x x x x x x x x x x x x x x x x x             x x              
+x x x x x x x x x x x x x   x x x x x x   x x x   x x x x x   x x              
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x   x x x x x x x x
+x x x x     x x x x x x x x x x   x x x x x x x x x x x x x x x x x x x x x x x
+x x             x x x x x x x       x x x x x x x x x x x x x x x x x          
+                            x       x x x x x x x x x x x x x x x   x   x x x  
+      x     x x x                     x x x x x x x x x x x x x x x x x x   x x
+              x x x                     x   x x x x x x x x x x x x x x x x x x
+            x x x x               x x       x x x x x x x x x   x x x x x x x x
+            x x x x             x x x x           x     x x x x x x x x x x x x
+            x x x x             x x x x                 x x x x x x x x x x x x
+            x x x x           x   x x                     x x x x x x x x x x x
+x           x x x x         x x x x x                 x   x x x x x x x x x x x
+x x         x x x x         x x x x x                       x   x x x x x x x x
+x x         x x x x       x x x x x                 x x x       x x x x x x x x
+x x x                     x x x x x             x x x x x x         x x x   x  
+x x       x x x x x x x       x x             x x x x x                        
+    x x x x x x x x x x x x x   x         x x x x x x                     x    
+  x x x x x x x x x x x x x x x         x x x x x x                            
+x x x x   x x x x x x x x x x x   x     x x x x x                              
+x   x x x x x x x x x x x x x x x x x   x x x x                                
+x x x x x x x x x x x x   x x x x x x x   x x                     x            
+x x x x   x x x x x x x x x x x x x x x                                     x  
+x x x x x x x x x x x x x x x x x x x x x         x x x x x x x x x x x x x x x
+      x       x x x             x x x x   x   x x x x x x x x x x x x x x x x x
+x x         x x x x           x   x x x x x   x x x x x   x x x x x x x x x x x
+x x       x x x x x x x       x   x x   x x     x x x x x x x x x x x x x x x  
+x x x x x x x x x x x x   x x x x x x x x x x   x x x                          
+x x x x x x x x x x x x x x x x x x x x x x x                                  
+x x x x x x   x x x x x x x x x x x x x x x x                                  
+x x x x x x         x x x x x x x x x x x x x                                 x
+x x x x x x x x x x x x x x x x   x x x x x x                                  
+      x x x x x x x             x x x x x x x                                  
+x x         x                         x x         x x x x x                    
+x x x x x         x x x x x x   x           x x x x x x x x x   x     x   x   x
+x x x x x x     x x x x   x x x x x x       x x x x x x x x x x x         x x x
+x x x x x x       x x x x x x x x x x x       x x x x x x x x   x x x     x x x
+x x x x x x x     x x x x x x x x x x x x     x x x x     x x x x x x x     x x
+
+----------------------------------------
+Image after 20 iterations of LBP
+x x x x x x x x x x x x x x x x x x x x x   x x x x x x x x x                  
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x                
+x x x x x x x x x x x x x x x x x x x x x x x x x             x x              
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x   x x              
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x   x x x x x x x x
+x x x       x x x x x x x x x x     x x x x x x x x x x x x x x x x x x x x x x
+x x             x x x x x x x       x x x x x x x x x x x x x x x x x          
+                                    x x x x x x x x x x x x x x x x x   x x x  
+              x x                     x x x x x x x x x x x x x x x x x x x x x
+              x x x                     x x x x x x x x x x x x x x x x x x x x
+            x x x x               x x       x x x x x x x x x x x x x x x x x x
+            x x x x             x x x x                 x x x x x x x x x x x x
+            x x x x             x x x x                 x x x x x x x x x x x x
+            x x x x           x x x x                     x x x x x x x x x x x
+x           x x x x         x x x x x                     x x x x x x x x x x x
+x x         x x x x         x x x x x                       x x x x x x x x x x
+x x         x x x x       x x x x x                 x x x       x x x x x x x x
+x x x                     x x x x x               x x x x x         x x x      
+x x       x x x x x x x       x x             x x x x x                        
+    x x x x x x x x x x x x x             x x x x x x                          
+  x x x x x x x x x x x x x x x         x x x x x x                            
+x x x x x x x x x x x x x x x x x x     x x x x x                              
+x x x x x x x x x x x x x x x x x x x   x x x x                                
+x x x x x x x x x x x x x x x x x x x x   x x                                  
+x x x x x x x x x x x x x x x x x x x x                                        
+x x x x x x x x x x x x x x x x x x x x x         x x x x x x x x x x x x x x x
+              x x x             x x x x x x   x x x x x x x x x x x x x x x x x
+x x         x x x x           x   x x x x x   x x x x x x x x x x x x x x x x x
+x x       x x x x x x x       x x x x x x x     x x x x x x x x x x x x x x x  
+x x x x x x x x x x x x x x x x x x x x x x x   x x x                          
+x x x x x x x x x x x x x x x x x x x x x x x                                  
+x x x x x x x x x x x x x x x x x x x x x x x                                  
+x x x x x x         x x x x x x x x x x x x x                                  
+x x x x x x x x x x x x x x x x x x x x x x x                                  
+      x x x x x x x             x x x x x x x                                  
+x x         x                         x x         x x x x x                    
+x x x x x         x x x x x x x x           x x x x x x x x x x x         x x x
+x x x x x x     x x x x x x x x x x x       x x x x x x x x x x x x       x x x
+x x x x x x       x x x x x x x x x x x       x x x x x x x x x x x x     x x x
+x x x x x x x     x x x x x x x x x x x x     x x x x     x x x x x x x     x x
+
+----------------------------------------
+Image after 30 iterations of LBP
+x x x x x x x x x x x x x x x x x x x x x   x x x x x x x x x                  
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x                
+x x x x x x x x x x x x x x x x x x x x x x x x x             x x              
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x   x x              
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x   x x x x x x x x
+x x x       x x x x x x x x x x     x x x x x x x x x x x x x x x x x x x x x x
+x x             x x x x x x x       x x x x x x x x x x x x x x x x x          
+                                    x x x x x x x x x x x x x x x x x   x x x  
+              x x                     x x x x x x x x x x x x x x x x x x x x x
+              x x x                     x x x x x x x x x x x x x x x x x x x x
+            x x x x               x x       x x x x x x x x x x x x x x x x x x
+            x x x x             x x x x                 x x x x x x x x x x x x
+            x x x x             x x x x                 x x x x x x x x x x x x
+            x x x x           x x x x                     x x x x x x x x x x x
+x           x x x x         x x x x x                     x x x x x x x x x x x
+x x         x x x x         x x x x x                       x x x x x x x x x x
+x x         x x x x       x x x x x                 x x x       x x x x x x x x
+x x x                     x x x x x               x x x x x         x x x      
+x x       x x x x x x x       x x             x x x x x                        
+    x x x x x x x x x x x x x             x x x x x x                          
+  x x x x x x x x x x x x x x x         x x x x x x                            
+x x x x x x x x x x x x x x x x x x     x x x x x                              
+x x x x x x x x x x x x x x x x x x x   x x x x                                
+x x x x x x x x x x x x x x x x x x x x   x x                                  
+x x x x x x x x x x x x x x x x x x x x                                        
+x x x x x x x x x x x x x x x x x x x x x         x x x x x x x x x x x x x x x
+              x x x             x x x x x x   x x x x x x x x x x x x x x x x x
+x x         x x x x           x   x x x x x   x x x x x x x x x x x x x x x x x
+x x       x x x x x x x       x x x x x x x     x x x x x x x x x x x x x x x  
+x x x x x x x x x x x x x x x x x x x x x x x   x x x                          
+x x x x x x x x x x x x x x x x x x x x x x x                                  
+x x x x x x x x x x x x x x x x x x x x x x x                                  
+x x x x x x         x x x x x x x x x x x x x                                  
+x x x x x x x x x x x x x x x x x x x x x x x                                  
+      x x x x x x x             x x x x x x x                                  
+x x         x                         x x         x x x x x                    
+x x x x x         x x x x x x x x           x x x x x x x x x x x         x x x
+x x x x x x     x x x x x x x x x x x       x x x x x x x x x x x x       x x x
+x x x x x x       x x x x x x x x x x x       x x x x x x x x x x x x     x x x
+x x x x x x x     x x x x x x x x x x x x     x x x x     x x x x x x x     x x
+
+
+Recovered from errors!
+----------------------------------------
+Doing part (g)
+Source image:
+x x x x x x x x x x x x x x x x x x x x x   x x x x x x x x x                  
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x                
+x x x x x x x x x x x x x x x x x x x x x x x x x             x x              
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x   x x              
+x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x   x x x x x x x x
+x x x       x x x x x x x x x x     x x x x x x x x x x x x x x x x x x x x x x
+x x             x x x x x x x       x x x x x x x x x x x x x x x x x          
+                                    x x x x x x x x x x x x x x x x x   x x x  
+              x x                     x x x x x x x x x x x x x x x x x x x x x
+              x x x                     x x x x x x x x x x x x x x x x x x x x
+            x x x x               x x       x x x x x x x x x x x x x x x x x x
+            x x x x             x x x x                 x x x x x x x x x x x x
+            x x x x             x x x x                 x x x x x x x x x x x x
+            x x x x           x x x x                     x x x x x x x x x x x
+x           x x x x         x x x x x                     x x x x x x x x x x x
+x x         x x x x         x x x x x                       x x x x x x x x x x
+x x         x x x x       x x x x x                 x x x       x x x x x x x x
+x x x                     x x x x x               x x x x x         x x x      
+x x       x x x x x x x       x x             x x x x x                        
+    x x x x x x x x x x x x x             x x x x x x                          
+  x x x x x x x x x x x x x x x         x x x x x x                            
+x x x x x x x x x x x x x x x x x x     x x x x x                              
+x x x x x x x x x x x x x x x x x x x   x x x x                                
+x x x x x x x x x x x x x x x x x x x x   x x                                  
+x x x x x x x x x x x x x x x x x x x x                                        
+x x x x x x x x x x x x x x x x x x x x x         x x x x x x x x x x x x x x x
+              x x x             x x x x x x   x x x x x x x x x x x x x x x x x
+x x         x x x x           x   x x x x x   x x x x x x x x x x x x x x x x x
+x x       x x x x x x x       x x x x x x x     x x x x x x x x x x x x x x x  
+x x x x x x x x x x x x x x x x x x x x x x x   x x x                          
+x x x x x x x x x x x x x x x x x x x x x x x                                  
+x x x x x x x x x x x x x x x x x x x x x x x                                  
+x x x x x x         x x x x x x x x x x x x x                                  
+x x x x x x x x x x x x x x x x x x x x x x x                                  
+      x x x x x x x             x x x x x x x                                  
+x x         x                         x x         x x x x x                    
+x x x x x         x x x x x x x x           x x x x x x x x x x x         x x x
+x x x x x x     x x x x x x x x x x x       x x x x x x x x x x x x       x x x
+x x x x x x       x x x x x x x x x x x       x x x x x x x x x x x x     x x x
+x x x x x x x     x x x x x x x x x x x x     x x x x     x x x x x x x     x x
+
+----------------------------------------
+Image after 0 iterations of LBP
+x x x x x x x x x x x x   x x x x x x x x   x x x x x x x x   x                
+  x x x x x x x x x x x x x   x x x x x   x x     x   x     x x         x      
+  x x     x x   x x x x x x x x x x x x x   x x x       x     x                
+x x   x x x x x x     x x x x x x   x x x x x   x x x x x x   x x              
+x x     x x x x x x x x x x x x x x x x x x x x   x x x x x     x x x x x x x x
+x x x       x x x x x x x x x x   x x x x x x x x x x x   x x x x x x x x x x x
+  x             x x x x   x x   x     x x x x x x x x x x x x x x x x     x    
+  x           x           x         x     x x   x x x x x   x x x x x   x x x  
+  x x           x                     x x x x x x x x x x x x x x x x x x   x x
+x x           x x x     x   x           x x x x x x   x   x x x x x x x x x x x
+  x         x x x x               x x       x x x   x x x x x x   x   x x   x  
+            x x x x                 x x   x     x       x x x x x x x x   x x x
+x           x x x x               x x x                 x x x x x x x x x x   x
+            x x x x     x     x x x x                     x x x x x   x x x    
+x           x x x x x x x   x x x x x                   x x x x x x x x x x x x
+x x           x x x         x x x x x                       x x x x x x x x x  
+x x         x x x x     x   x x x x         x       x   x       x x x x x x x x
+x x x           x         x x x x x         x       x x x x         x x x      
+x x       x x x x x x         x x             x x x x           x     x       x
+    x x x x x x x   x x x x               x x x   x x             x            
+    x x   x x x x x x x x x   x   x     x x x   x x                     x      
+x x x x x x   x x x x x x x x x x x     x x x x                                
+x x x x x x x x x x x   x x x x x x x   x x x x       x   x     x              
+x x x x   x x x x x x   x x x x x x x x   x                 x         x        
+  x x   x x x x x x x x x x x x x x x x     x                                  
+x x x x x x x x x x x     x x x x x x   x           x x x x x x x x x   x   x x
+    x         x x x             x x x x x x   x x x x x x x x x x x x x x x x  
+x x x       x x   x           x   x x x x x   x x x x x x x x x x x x x x x x x
+x x       x x x x x x x       x x x   x x x     x x x   x x x x x x x x x x x  
+    x   x x x x x x x x x x   x x x     x x x   x x x x                        
+  x x     x x x x x x x x x x x x x x x x             x                       x
+x x x x     x x x x x   x x x x x x x x x x x                                  
+x x x x x x         x x x x x x x x x x x x x       x                          
+x   x x x x x x x x x x x x x x x x x x x x x   x                              
+x         x x x   x x           x x x   x   x                 x                
+x x                       x           x x   x     x x x x x     x       x     x
+x x   x x         x x x x x x   x           x x     x x x x x x x         x x  
+  x x x x x     x x x x x x   x x x x       x x x   x x x x x x x x       x    
+x x x x x x       x   x x x x x x x x x   x   x x x x x x x x x x x x     x x x
+x x x x x x x     x x x x x x x x x x x x     x x x         x x x x x x     x x
+
+----------------------------------------
+Image after 1 iterations of LBP
+x x x x x x x x x x x x   x x x x x x x x   x x x x x x x x   x                
+  x x x x x x x x x x x x x   x x x x x   x x     x   x     x x         x      
+  x x     x x   x x x x x x x x x x x x x   x x x       x     x                
+x x   x x x x x x     x x x x x x   x x x x x   x x x x x x   x x              
+x x     x x x x x x x x x x x x x x x x x x x x   x x x x x     x x x x x x x x
+x x x       x x x x x x x x x x   x x x x x x x x x x x   x x x x x x x x x x x
+  x             x x x x   x x   x     x x x x x x x x x x x x x x x x     x    
+  x           x           x         x     x x   x x x x x   x x x x x   x x x  
+  x x           x                     x x x x x x x x x x x x x x x x x x   x x
+x x           x x x     x   x           x x x x x x   x   x x x x x x x x x x x
+  x         x x x x               x x       x x x   x x x x x x   x   x x   x  
+            x x x x                 x x   x     x       x x x x x x x x   x x x
+x           x x x x               x x x                 x x x x x x x x x x   x
+            x x x x     x     x x x x                     x x x x x   x x x    
+x           x x x x x x x   x x x x x                   x x x x x x x x x x x x
+x x           x x x         x x x x x                       x x x x x x x x x  
+x x         x x x x     x   x x x x         x       x   x       x x x x x x x x
+x x x           x         x x x x x         x       x x x x         x x x      
+x x       x x x x x x         x x             x x x x           x     x       x
+    x x x x x x x   x x x x               x x x   x x             x            
+    x x   x x x x x x x x x   x   x     x x x   x x                     x      
+x x x x x x   x x x x x x x x x x x     x x x x                                
+x x x x x x x x x x x   x x x x x x x   x x x x       x   x     x              
+x x x x   x x x x x x   x x x x x x x x   x                 x         x        
+  x x   x x x x x x x x x x x x x x x x     x                                  
+x x x x x x x x x x x     x x x x x x   x           x x x x x x x x x   x   x x
+    x         x x x             x x x x x x   x x x x x x x x x x x x x x x x  
+x x x       x x   x           x   x x x x x   x x x x x x x x x x x x x x x x x
+x x       x x x x x x x       x x x   x x x     x x x   x x x x x x x x x x x  
+    x   x x x x x x x x x x   x x x     x x x   x x x x                        
+  x x     x x x x x x x x x x x x x x x x             x                       x
+x x x x     x x x x x   x x x x x x x x x x x                                  
+x x x x x x         x x x x x x x x x x x x x       x                          
+x   x x x x x x x x x x x x x x x x x x x x x   x                              
+x         x x x   x x           x x x   x   x                 x                
+x x                       x           x x   x     x x x x x     x       x     x
+x x   x x         x x x x x x   x           x x     x x x x x x x         x x  
+  x x x x x     x x x x x x   x x x x       x x x   x x x x x x x x       x    
+x x x x x x       x   x x x x x x x x x   x   x x x x x x x x x x x x     x x x
+x x x x x x x     x x x x x x x x x x x x     x x x         x x x x x x     x x
+
+----------------------------------------
+Image after 2 iterations of LBP
+x x x x x x x x x x x x   x x x x x x x x   x x x x x x x x   x                
+  x x x x x x x x x x x x x   x x x x x   x x     x   x     x x         x      
+  x x     x x   x x x x x x x x x x x x x   x x x       x     x                
+x x   x x x x x x     x x x x x x   x x x x x   x x x x x x   x x              
+x x     x x x x x x x x x x x x x x x x x x x x   x x x x x     x x x x x x x x
+x x x       x x x x x x x x x x   x x x x x x x x x x x   x x x x x x x x x x x
+  x             x x x x   x x   x     x x x x x x x x x x x x x x x x     x    
+  x           x           x         x     x x   x x x x x   x x x x x   x x x  
+  x x           x                     x x x x x x x x x x x x x x x x x x   x x
+  x           x x x     x   x           x x x x x x   x   x x x x x x x x x x x
+  x         x x x x               x x       x x x   x x x x x x   x   x x   x  
+            x x x x                 x x   x     x       x x x x x x x x   x x x
+x           x x x x               x x x                 x x x x x x x x x x   x
+            x x x x     x     x x x x                     x x x x x   x x x    
+x           x x x x x x x   x x x x x                   x x x x x x x x x x x x
+x x           x x x         x x x x x                       x x x x x x x x x x
+x x         x x x x     x   x x x x         x       x   x       x x x x x x x x
+x x x           x         x x x x x         x       x x x x         x x x      
+x x       x x x x x x         x x             x x x x           x     x       x
+    x x x x x x x   x x x x               x x x   x x             x            
+    x x   x x x x x x x x x   x   x     x x x   x x                     x      
+x x x x x x   x x x x x x x x x x x     x x x x                                
+x x x x x x x x x x x   x x x x x x x   x x x x       x   x     x              
+x x x x   x x x x x x   x x x x x x x x   x                 x         x     x  
+  x x   x x x x x x x x x x x x x x x x     x                                  
+x x x x x x x x x x x     x x x x x x   x           x x x x x x x x x   x   x x
+    x         x x x             x x x x x x   x x x x x x x x x x x x x x x x  
+x x x       x x   x           x   x x x x x   x x x x x x x x x x x x x x x x x
+x x       x x x x x x x       x x x   x x x     x x x   x x x x x x x x x x x  
+    x   x x x x x x x x x x   x x x     x x x   x x x x                        
+  x x     x x x x x x x x x x x x x x x x   x         x                       x
+x x x x     x x x x x   x x x x x x x x x x x                                  
+x x x x x x         x x x x x x x x x x x x x       x                          
+x   x x x x x x x x x x x x x x x x x x x x x   x                              
+x         x x x   x x           x x x   x   x                 x                
+x x                       x           x x   x     x x x x x     x       x     x
+x x   x x         x x x x x x   x           x x     x x x x x x x         x x  
+  x x x x x     x x x x x x   x x x x       x x x   x x x x x x x x       x    
+x x x x x x       x   x x x x x x x x x   x   x x x x x x x x x x x x     x x x
+x x x x x x x     x x x x x x x x x x x x     x x x         x x x x x x     x x
+
+----------------------------------------
+Image after 3 iterations of LBP
+x x x x x x x x x x x x   x x x x x x x x   x x x x x x x x   x                
+  x x x x x x x x x x x x x   x x x x x   x x     x   x     x x         x      
+  x x     x x   x x x x x x x x x x x x x   x x x       x     x                
+x x   x x x x x x     x x x x x x   x x x x x   x x x x x x   x x              
+x x     x x x x x x x x x x x x x x x x x x x x   x x x x x     x x x x x x x x
+x x x       x x x x x x x x x x   x x x x x x x x x x x   x x x x x x x x x x x
+  x             x x x x   x x   x     x x x x x x x x x x x x x x x x     x    
+  x           x           x         x     x x   x x x x x   x x x x x   x x x  
+  x x           x                     x x x x x x x x x x x x x x x x x x   x x
+  x           x x x     x   x           x x x x x x   x   x x x x x x x x x x x
+  x         x x x x               x x       x x x   x x x x x x   x   x x   x  
+            x x x x                 x x   x     x       x x x x x x x x   x x x
+x           x x x x               x x x                 x x x x x x x x x x   x
+            x x x x     x     x x x x                     x x x x x   x x x    
+x           x x x x x x x   x x x x x                   x x x x x x x x x x x x
+x x           x x x         x x x x x                       x x x x x x x x x x
+x x         x x x x     x   x x x x         x       x   x       x x x x x x x x
+x x x           x         x x x x x         x       x x x x         x x x      
+x x       x x x x x x         x x             x x x x           x     x       x
+    x x x x x x x   x x x x               x x x   x x             x            
+    x x   x x x x x x x x x   x   x     x x x   x x                     x      
+x x x x x x   x x x x x x x x x x x     x x x x                                
+x x x x x x x x x x x   x x x x x x x   x x x x       x   x     x              
+x x x x   x x x x x x   x x x x x x x x   x                 x         x     x  
+  x x   x x x x x x x x x x x x x x x x     x                                  
+x x x x x x x x x x x     x x x x x x   x           x x x x x x x x x   x   x x
+    x         x x x             x x x x x x   x x x x x x x x x x x x x x x x  
+x x x       x x   x           x   x x x x x   x x x x x x x x x x x x x x x x x
+x x       x x x x x x x       x x x   x x x     x x x   x x x x x x x x x x x  
+    x   x x x x x x x x x x   x x x     x x x   x x x x                        
+  x x     x x x x x x x x x x x x x x x x   x         x                       x
+x x x x     x x x x x   x x x x x x x x x x x                                  
+x x x x x x         x x x x x x x x x x x x x       x                          
+x   x x x x x x x x x x x x x x x x x x x x x   x                              
+x         x x x   x x           x x x   x   x                 x                
+x x                       x           x x   x     x x x x x     x       x     x
+x x   x x         x x x x x x   x           x x     x x x x x x x         x x  
+  x x x x x     x x x x x x   x x x x       x x x   x x x x x x x x       x    
+x x x x x x       x   x x x x x x x x x   x   x x x x x x x x x x x x     x x x
+x x x x x x x     x x x x x x x x x x x x     x x x         x x x x x x     x x
+
+----------------------------------------
+Image after 5 iterations of LBP
+x x x x x x x x x x x x   x x x x x x x x   x x x x x x x x x x                
+  x x x x x x x x x x x x x   x x x x x   x x x   x   x     x x         x      
+  x x     x x   x x x x x x x x x x x x x   x x x             x                
+x x   x x x x x x     x x x x x x x x x x x x x x x x x x x   x x     x        
+x x x   x x x x x x x x x x x x x x x x x x x x   x x x x x     x x x x x x x x
+x           x x x x x x x x x x     x x x x x x x x x x   x x x x x x x x x x x
+  x             x x x x   x x   x     x x x x x x x x x x x x x x x x     x    
+  x           x           x x       x     x x x x x x x x   x x x x x   x x x  
+  x                                   x x x x x x x x x x x x x x x x x x   x x
+  x           x x x     x   x           x x x x x x   x   x x x x x x x x x x x
+  x         x x x x               x x       x x x x x x x x x x   x x x x x x x
+            x x x x                 x x         x       x x x x x x x x   x x x
+x             x x x               x x x                 x x x x x x x x x x x x
+            x x   x     x     x x x x                     x x x x x   x x x    
+x           x x x x   x x   x x x x x                   x x x x x x x x x x x x
+x x         x x x x         x x x x x                       x x x x   x x x x x
+x x         x x x x     x   x x   x                 x   x       x x x x x x x x
+x x x                     x x x x x         x     x x x x x         x x x      
+x x       x x x x   x         x x             x x x x           x     x       x
+    x x x x x x x   x x x x               x x x     x             x            
+    x x x x x x x x x x x x   x   x     x x x x x x                     x      
+x x x x x x   x x x x x x x x x x x     x x x x                                
+x x x x x x x x x x x   x x x x x x x   x x x x                 x              
+x x x x   x x x   x x x x x x x x x x x   x                                    
+  x x   x x x x x x x x x x x x x x x x     x         x                        
+x x x x x x x x x x x x   x x x x x x   x           x   x x x x x x x   x   x x
+    x         x x x             x x x x x x   x x x x x x x x x x x x x x x x x
+x x         x x               x   x x x x x   x x x x x x x x x x x x x x x x x
+x x       x x x x x x x       x x x   x x x     x x x   x x x x x x x x x x x  
+    x   x x x x   x x x x x x x x x   x x x x   x x x x     x                  
+x x x     x x x x x x x x x x x x x x x x             x                        
+x x x x     x x x x x x x x x x x x x x x x x                                  
+x x x x x x         x x x x x x x x x x x x x       x                          
+x x x x x x x x x x x x x x x x   x x x x x x   x                              
+x         x x x   x x           x x x   x   x                 x                
+x x                       x           x x   x     x x x x x     x       x     x
+x x   x x         x x x x x x   x x         x x     x x x x   x x         x x  
+x x x x x x     x x x x x x   x x x x x     x x x   x x x x x x x x x     x    
+x x x x x x       x x x x x x x x x x x   x   x x x x x x x x x x x x     x x x
+x x x x x x x     x x x x x x x x x x x x     x x x       x x x x x x x     x x
+
+----------------------------------------
+Image after 10 iterations of LBP
+x x x x x x x x x x x x   x x x x x x x x   x x x x x x x x x x                
+  x x x x x x x x x x x x x   x x x x x   x x x   x   x   x x x         x      
+  x x     x x   x x x x x x x x x x x x x   x x x             x                
+x x   x x x x x x x   x x x x x x x x x x x x x x x x x x x   x x     x        
+x x x   x x x x x x x x x x x x x x x x x x x x   x x x x x     x x x x x x x x
+x           x x x x x x x x x x     x x x x x x x x x x   x x x x x x x x x x x
+  x             x x x x   x x   x     x x x x x x x x x x x x x x x x     x    
+              x           x         x     x x x x x x x x   x x x x x   x x x  
+  x             x                     x x x x x x x x x x x x x x x x x x   x x
+  x           x x x         x           x x x x x x x x   x x x x x x x x x x x
+  x         x x x x               x x       x x x x x x x x x x x x x x x   x x
+            x x x x               x x x         x       x x x x x x x x   x x x
+x             x x x               x x x                 x x x x x x x x x x x x
+            x x   x     x     x   x x                     x x x x x   x x x    
+x           x x x x   x x   x x x x x                   x x x x x x x x x x x x
+x x         x x x x         x x x x x                       x x x x x x x x x x
+x x         x x x x     x   x x   x                 x   x       x x x x x x x x
+x x x                     x x x x x         x     x x x x x         x x x      
+x x       x x x x   x         x x             x x x x           x     x       x
+    x x x x x x x   x x x x x             x x x     x             x            
+    x x   x x x x x x x x x   x   x     x x x x x x                     x      
+x x x x x x   x x x x x x x x x x x     x x x x                                
+x x x x x x x x x x x   x x x x x x x   x x x x                 x              
+x x x x   x x x   x x x x x x x x x x x   x                           x        
+  x x x x x x x x x x x x x x x x x x x     x         x                        
+x x x x x x x x x x x x   x x x x x x x x           x x x x x x x x x   x x x x
+  x x         x x x             x x   x x x   x x x x x x x x x x x x x x x x x
+x x x       x x               x   x x x x x   x x x x x x x x x x x x x x x x x
+x x       x x x x x x x       x x x   x x x     x x x   x x x x x x x x x x x  
+    x   x x x x x x x x x x x x x x   x x x x   x x x x     x                  
+x x x x   x x x x x x x x x x x x x x x x   x                                 x
+x x x x     x x x x x x x x x x x x x x x x x                                  
+x x x x x x         x x x x x x x x x x x x x       x                          
+x x x x x x x x x x x x x x x x x x x x x x x   x                              
+x         x x x   x x           x x x x x   x                 x                
+x x                       x           x x   x     x x x x x     x       x      
+x x   x x         x x x x x x   x           x x     x x x x   x x         x x  
+x x x x x x     x x x x x x   x x x x       x x x x x x x x x x x x     x x x  
+x x x x x x       x x x x x x x x x x x   x   x x x x x x x x x x x x     x x x
+x x x x x x x     x x x x x x x x x x x x     x x x       x x x x x x x     x x
+
+----------------------------------------
+Image after 20 iterations of LBP
+x x x x x x x x x x x x   x x x x x x x x   x x x x x x x x x x                
+  x x x x x x x x x x x x x   x x x x x   x x x   x   x   x x x         x      
+  x x     x x   x x x x x x x x x x x x x   x x x             x x              
+x x   x x x x x x x x x x x x x x x x x x x x x x x x x x x   x x     x        
+x x x   x x x x x x x x x x x x x x x x x x x x   x x x x x     x x x x x x x x
+x x           x x x x x x x x x     x x x x x x x x x x   x x x x x x x x x x x
+  x             x x x x   x x   x     x x x x x x x x x x x x x x x x     x    
+              x           x         x     x x x x x x x x x x x x x x   x x x  
+  x             x                     x x x x x x x x x x x x x x x x x x x x x
+  x           x x x         x           x x x x x x   x   x x x x x x x x x x x
+  x         x x x x               x x       x x x x x x x x x x x x x x x   x x
+            x x x x               x x x         x       x x x x x x x x   x x x
+              x x x               x x x                 x x x x x x x x x x x x
+            x x   x     x     x   x x                     x x x x x   x x x    
+x           x x x x   x x   x x x x x                   x x x x x x x x x x x x
+x x         x x x x         x x x x x                       x x x x x x x x x x
+x x         x x x x     x   x x   x                 x   x       x x x x x x x x
+x x x                     x x x x x         x     x x x x x         x x x      
+x x       x x x x   x         x x             x x x x           x     x       x
+    x x x x x x x   x x x x x             x x x     x             x            
+    x x   x x x x x x x x x   x   x     x x x x x x                     x      
+x x x x x x     x x x x x x x x x x     x x x x                                
+x x x x x x x x x x x   x x x x x x x   x x x x                 x              
+x x x x   x x x   x x x x x x x x x x x   x     x                     x        
+  x x x x x x x x x x x x x x x x x x x     x         x                        
+x x x x x x x x x x x x   x x x x x x x x           x x x x x x x x x   x x x x
+  x x         x x x             x x   x x x   x x x x x x x x x x x x x x x x x
+x x x       x x               x   x x x x x   x x x x x x x x x x x x x x x x x
+x x       x x x x x x x       x x x   x x x     x x x   x x x x x x x x x x x  
+    x   x x x x x x x x x x x x x x   x x x x   x x x x     x                  
+x x x x   x x x x x x x x x x x x x x x x   x                                  
+x x x x     x x x x x x x x x x x x x x x x x                                  
+x x x x x x         x x x x x x x x x x x x x       x                          
+x x x x x x x x x x x x x x x x x x x x x x x   x                              
+x         x x x   x x           x x x x x   x                 x                
+x x                       x           x x   x     x x x x x     x       x      
+x x x x x         x x x x x x   x x         x x x   x x x x   x x         x x  
+x x x x x x     x x x x x x   x x x x       x x x x x x x x x x x x     x x x  
+x x x x x x       x x x x x x x x x x x   x   x x x x x x x x x x x x     x x x
+x x x x x x x     x x x x x x x x x x x x     x x x         x x x x x x     x x
+
+----------------------------------------
+Image after 30 iterations of LBP
+x x x x x x x x x x x x   x x x x x x x x   x x x x x x x x x x                
+  x x x x x x x x x x x x x   x x x x x   x x x   x   x   x x x         x      
+  x x     x x   x x x x x x x x x x x x x   x x x             x x              
+x x   x x x x x x x x x x x x x x x x x x x x x x x x x x x   x x     x        
+x x x   x x x x x x x x x x x x x x x x x x x x   x x x x x     x x x x x x x x
+x x           x x x x x x x x x     x x x x x x x x x x   x x x x x x x x x x x
+  x             x x x x   x x   x     x x x x x x x x x x x x x x x x     x    
+              x           x         x     x x x x x x x x x x x x x x   x x x  
+  x             x                     x x x x x x x x x x x x x x x x x x x x x
+  x           x x x         x           x x x x x x   x   x x x x x x x x x x x
+  x         x x x x               x x       x x x x x x x x x x x x x x x   x x
+            x x x x               x x x         x       x x x x x x x x   x x x
+              x x x               x x x                 x x x x x x x x x x x x
+            x x   x     x     x   x x                     x x x x x   x x x    
+x           x x x x   x x   x x x x x                   x x x x x x x x x x x x
+x x         x x x x         x x x x x                       x x x x x x x x x x
+x x         x x x x     x   x x   x                 x   x       x x x x x x x x
+x x x                     x x x x x         x     x x x x x         x x x      
+x x       x x x x   x         x x             x x x x           x     x       x
+    x x x x x x x   x x x x x             x x x     x             x            
+    x x   x x x x x x x x x   x   x     x x x x x x                     x      
+x x x x x x     x x x x x x x x x x     x x x x                                
+x x x x x x x x x x x   x x x x x x x   x x x x                 x              
+x x x x   x x x   x x x x x x x x x x x   x     x                     x        
+  x x x x x x x x x x x x x x x x x x x     x         x                        
+x x x x x x x x x x x x   x x x x x x x x           x x x x x x x x x   x x x x
+  x x         x x x             x x   x x x   x x x x x x x x x x x x x x x x x
+x x x       x x               x   x x x x x   x x x x x x x x x x x x x x x x x
+x x       x x x x x x x       x x x   x x x     x x x   x x x x x x x x x x x  
+    x   x x x x x x x x x x x x x x   x x x x   x x x x     x                  
+x x x x   x x x x x x x x x x x x x x x x   x                                  
+x x x x     x x x x x x x x x x x x x x x x x                                  
+x x x x x x         x x x x x x x x x x x x x       x                          
+x x x x x x x x x x x x x x x x x x x x x x x   x                              
+x         x x x   x x           x x x x x   x                 x                
+x x                       x           x x   x     x x x x x     x       x      
+x x x x x         x x x x x x   x x         x x x   x x x x   x x         x x  
+x x x x x x     x x x x x x   x x x x       x x x x x x x x x x x x       x x  
+x x x x x x       x x x x x x x x x x x   x   x x x x x x x x x x x x     x x x
+x x x x x x x     x x x x x x x x x x x x     x x x         x x x x x x     x x
+
+
+Not entirely recovered from errors.
+----------------------------------------

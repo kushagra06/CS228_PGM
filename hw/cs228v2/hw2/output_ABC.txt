@@ -1,0 +1,278 @@
+PART A
+
+My solution implements a version of message passing / variable elimination
+that uses the fact that our MRF is a tree.
+We run send messages up and down parent-child edges, arriving at an
+asymptotically optimal variable ordering.
+
+I implemented Factor.* methods in factors.py, but did not use clique_tree.py
+at all.
+Instead, I changed binary_tree.py so that the nodes hold some extra information.
+Most of the model itself is implemented in mrf_tree.py
+
+--------------------------------------------------------------------------------
+
+TESTING CODE (OUTPUT CAN BE IGNORED)
+you now have a tree that looks like this: 
+((((((1-human,2-baboon),4-marmoset),((6-rat,7-mouse),9-rabbit)),(12-cow,13-dog)),16-elephant),18-platypus)
+
+Evidence:
+{}
+P(Evidence) = 1.0
+Conditional marginal distributions for every inner node:
+3 [ 0.2957244   0.20457524  0.20511102  0.29458935] sum = 1.0
+5 [ 0.29563762  0.20463148  0.20508337  0.29464754] sum = 1.0
+8 [ 0.2957244   0.20457524  0.20511102  0.29458935] sum = 1.0
+10 [ 0.29563762  0.20463148  0.20508337  0.29464754] sum = 1.0
+11 [ 0.29552913  0.20469924  0.20505576  0.29471587] sum = 1.0
+14 [ 0.29552913  0.20469924  0.20505576  0.29471587] sum = 1.0
+15 [ 0.29539269  0.20478104  0.20503023  0.29479604] sum = 1.0
+17 [ 0.29522  0.20488  0.20501  0.29489] sum = 1.0
+19 [ 0.295  0.205  0.205  0.295] sum = 1.0
+Likelihood and corresponding vector: 0.0133487212137 {1: 3, 2: 3, 3: 3, 4: 3, 5: 3, 6: 3, 7: 3, 8: 3, 9: 3, 10: 3, 11: 3, 12: 3, 13: 3, 14: 3, 15: 3, 16: 3, 17: 3, 18: 3, 19: 3}
+Likelihood of that vector estimated naively: 0.0133487212137
+
+
+--------------------------------------------------------------------------------
+PART B AND C
+
+Message from 1 to 3
+Factor (\sum_{1} ((((((((((F(1,3) with ...s 0)):
+Factor object with scope [3] and corresponding cardinalities [4]
+CPD:
+[ 0.032  0.816  0.028  0.076]
+
+Message from 2 to 3
+Factor (\sum_{2} ((((((((((F(2,3) with ...s 0)):
+Factor object with scope [3] and corresponding cardinalities [4]
+CPD:
+[ 0.052  0.11   0.042  0.842]
+
+Message from 3 to 5
+Factor (\sum_{3} ((((((((((((F(3,5) * (...s 0)):
+Factor object with scope [5] and corresponding cardinalities [4]
+CPD:
+[ 0.00768265  0.08039275  0.00635416  0.06082532]
+
+Message from 4 to 5
+Factor (\sum_{4} ((((((((((F(4,5) with ...s 0)):
+Factor object with scope [5] and corresponding cardinalities [4]
+CPD:
+[ 0.032  0.816  0.028  0.076]
+
+Message from 5 to 11
+Factor (\sum_{5} ((((((((((((F(5,11) * ...s 0)):
+Factor object with scope [11] and corresponding cardinalities [4]
+CPD:
+[ 0.00255902  0.05405479  0.00220472  0.00889616]
+
+Message from 6 to 8
+Factor (\sum_{6} ((((((((((F(6,8) with ...s 0)):
+Factor object with scope [8] and corresponding cardinalities [4]
+CPD:
+[ 0.085  0.028  0.808  0.029]
+
+Message from 7 to 8
+Factor (\sum_{7} ((((((((((F(7,8) with ...s 0)):
+Factor object with scope [8] and corresponding cardinalities [4]
+CPD:
+[ 0.032  0.816  0.028  0.076]
+
+Message from 8 to 10
+Factor (\sum_{8} ((((((((((((F(8,10) * ...s 0)):
+Factor object with scope [10] and corresponding cardinalities [4]
+CPD:
+[ 0.0050291   0.019645    0.01934434  0.00439247]
+
+Message from 9 to 10
+Factor (\sum_{9} ((((((((((F(9,10) with...s 0)):
+Factor object with scope [10] and corresponding cardinalities [4]
+CPD:
+[ 0.831  0.046  0.122  0.053]
+
+Message from 10 to 11
+Factor (\sum_{10} ((((((((((((F(10,11) ...s 0)):
+Factor object with scope [11] and corresponding cardinalities [4]
+CPD:
+[ 0.00371453  0.00102133  0.00245183  0.00055463]
+
+Message from 11 to 15
+Factor (\sum_{11} ((((((((((((F(11,15) ...s 0)):
+Factor object with scope [15] and corresponding cardinalities [4]
+CPD:
+[  1.03817927e-05   4.61807163e-05   7.28043697e-06   9.01085538e-06]
+
+Message from 12 to 14
+Factor (\sum_{12} ((((((((((F(12,14) wi...s 0)):
+Factor object with scope [14] and corresponding cardinalities [4]
+CPD:
+[ 0.831  0.046  0.122  0.053]
+
+Message from 13 to 14
+Factor (\sum_{13} ((((((((((F(13,14) wi...s 0)):
+Factor object with scope [14] and corresponding cardinalities [4]
+CPD:
+[ 0.831  0.046  0.122  0.053]
+
+Message from 14 to 15
+Factor (\sum_{14} ((((((((((((F(14,15) ...s 0)):
+Factor object with scope [15] and corresponding cardinalities [4]
+CPD:
+[ 0.57533511  0.0342182   0.09645194  0.03955736]
+
+Message from 15 to 17
+Factor (\sum_{15} ((((((((((((F(15,17) ...s 0)):
+Factor object with scope [17] and corresponding cardinalities [4]
+CPD:
+[  5.09236150e-06   1.62308990e-06   1.35531163e-06   7.57157749e-07]
+
+Message from 16 to 17
+Factor (\sum_{16} ((((((((((F(16,17) wi...s 0)):
+Factor object with scope [17] and corresponding cardinalities [4]
+CPD:
+[ 0.085  0.028  0.808  0.029]
+
+Message from 17 to 19
+Factor (\sum_{17} ((((((((((((F(17,19) ...s 0)):
+Factor object with scope [19] and corresponding cardinalities [4]
+CPD:
+[  4.55377840e-07   9.00733950e-08   9.39836682e-07   7.66409639e-08]
+
+Message from 18 to 19
+Factor (\sum_{18} ((((((((((F(18,19) wi...s 0)):
+Factor object with scope [19] and corresponding cardinalities [4]
+CPD:
+[ 0.831  0.046  0.122  0.053]
+
+Message from 19 to -1
+Factor (\sum_{19} ((((((((((((RootPrior...s 0)):
+Factor object with scope [] and corresponding cardinalities []
+CPD:
+1.3718658959e-07
+
+Message from 19 to 17
+Factor (\sum_{19} ((RootPrior * (\sum_{...19))):
+Factor object with scope [17] and corresponding cardinalities [4]
+CPD:
+[ 0.20802915  0.01742806  0.04176286  0.02799993]
+
+Message from 17 to 15
+Factor (\sum_{17} (((\sum_{19} ((RootPr...17))):
+Factor object with scope [15] and corresponding cardinalities [4]
+CPD:
+[ 0.01887644  0.00197059  0.02880569  0.00307413]
+
+Message from 15 to 11
+Factor (\sum_{15} (((\sum_{17} (((\sum_...15))):
+Factor object with scope [11] and corresponding cardinalities [4]
+CPD:
+[ 0.0093734   0.00048959  0.00317346  0.00079123]
+
+Message from 11 to 5
+Factor (\sum_{11} (((\sum_{15} (((\sum_...11))):
+Factor object with scope [5] and corresponding cardinalities [4]
+CPD:
+[  2.99290564e-05   1.77340508e-06   9.27310040e-06   2.56182626e-06]
+
+Message from 5 to 3
+Factor (\sum_{5} (((\sum_{11} (((\sum_{...,5))):
+Factor object with scope [3] and corresponding cardinalities [4]
+CPD:
+[  9.04435949e-07   1.23354699e-06   3.37366681e-07   3.83824342e-07]
+
+Message from 3 to 1
+Factor (\sum_{3} (((\sum_{5} (((\sum_{1...,3))):
+Factor object with scope [1] and corresponding cardinalities [4]
+CPD:
+[  6.41814460e-08   1.37186590e-07   2.86180301e-08   2.90084269e-07]
+
+Message from 3 to 2
+Factor (\sum_{3} (((\sum_{5} (((\sum_{1...,3))):
+Factor object with scope [2] and corresponding cardinalities [4]
+CPD:
+[  7.30516695e-08   8.24772270e-07   3.91226800e-08   1.37186590e-07]
+
+Message from 5 to 4
+Factor (\sum_{5} (((\sum_{11} (((\sum_{...,5))):
+Factor object with scope [4] and corresponding cardinalities [4]
+CPD:
+[  2.13080905e-07   1.37186590e-07   7.56648403e-08   1.61317651e-07]
+
+Message from 11 to 10
+Factor (\sum_{11} (((\sum_{15} (((\sum_...11))):
+Factor object with scope [10] and corresponding cardinalities [4]
+CPD:
+[  2.23769524e-05   2.30935299e-05   8.63723923e-06   1.03790592e-05]
+
+Message from 10 to 8
+Factor (\sum_{10} (((\sum_{11} (((\sum_...10))):
+Factor object with scope [8] and corresponding cardinalities [4]
+CPD:
+[  1.56592280e-05   1.53319832e-06   2.47771761e-06   1.59123924e-06]
+
+Message from 8 to 6
+Factor (\sum_{8} (((\sum_{10} (((\sum_{...,8))):
+Factor object with scope [6] and corresponding cardinalities [4]
+CPD:
+[  4.88833717e-07   1.04805788e-06   1.37186590e-07   2.68417213e-07]
+
+Message from 8 to 7
+Factor (\sum_{8} (((\sum_{10} (((\sum_{...,8))):
+Factor object with scope [7] and corresponding cardinalities [4]
+CPD:
+[  1.35475355e-06   1.37186590e-07   1.73329081e-06   1.96874743e-07]
+
+Message from 10 to 9
+Factor (\sum_{10} (((\sum_{11} (((\sum_...10))):
+Factor object with scope [9] and corresponding cardinalities [4]
+CPD:
+[  1.37186590e-07   3.81940935e-07   1.58592526e-07   1.01159819e-07]
+
+Message from 15 to 14
+Factor (\sum_{15} (((\sum_{17} (((\sum_...15))):
+Factor object with scope [14] and corresponding cardinalities [4]
+CPD:
+[  1.94092001e-07   8.85071018e-08   1.89461118e-07   5.23329082e-08]
+
+Message from 14 to 12
+Factor (\sum_{14} (((\sum_{15} (((\sum_...14))):
+Factor object with scope [12] and corresponding cardinalities [4]
+CPD:
+[  1.37186590e-07   9.34149319e-09   3.25804405e-08   1.21411566e-08]
+
+Message from 14 to 13
+Factor (\sum_{14} (((\sum_{15} (((\sum_...14))):
+Factor object with scope [13] and corresponding cardinalities [4]
+CPD:
+[  1.37186590e-07   9.34149319e-09   3.25804405e-08   1.21411566e-08]
+
+Message from 17 to 16
+Factor (\sum_{17} (((\sum_{19} ((RootPr...17))):
+Factor object with scope [16] and corresponding cardinalities [4]
+CPD:
+[  8.89658099e-07   6.01780268e-08   1.37186590e-07   7.84262824e-08]
+
+Message from 19 to 18
+Factor (\sum_{19} ((RootPrior * (\sum_{...19))):
+Factor object with scope [18] and corresponding cardinalities [4]
+CPD:
+[  1.37186590e-07   2.64791973e-08   1.68265832e-07   3.61454940e-08]
+
+Evidence:
+{1: 1, 2: 3, 4: 1, 6: 2, 7: 1, 9: 0, 12: 0, 13: 0, 16: 2, 18: 0}
+
+P(Evidence) = 1.3718658959e-07
+# With USE_LOGSPACE=True, the output would have been Log P(Evidence) = -15.8019238699
+
+Conditional marginal distributions for every inner node:
+3 [ 0.01097032  0.80709913  0.002892    0.17903854] sum = 1.0
+5 [ 0.05363426  0.84801463  0.01202623  0.08632488] sum = 1.0
+8 [ 0.31047568  0.25534941  0.40861052  0.02556439] sum = 1.0
+10 [ 0.68168057  0.15212077  0.14858574  0.01761291] sum = 1.0
+11 [ 0.6494745   0.19702325  0.12504436  0.0284579 ] sum = 1.0
+14 [ 0.97700779  0.00136516  0.0205555   0.00107156] sum = 1.0
+15 [ 0.82186714  0.02269878  0.14744669  0.00798738] sum = 1.0
+17 [ 0.65637297  0.00577348  0.33337198  0.00448156] sum = 1.0
+19 [ 0.81373552  0.00619151  0.17133829  0.00873468] sum = 1.0
+
+--------------------------------------------------------------------------------

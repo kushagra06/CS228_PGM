@@ -60,3 +60,4 @@ BOOK : [Probabilistic Graphical Models: Principles and Techniques by Daphne Koll
 
 # FINAL EXAM
 
+[2017 Final]() , [2016 Final]() , [2007 Final](https://github.com/SKKSaikia/CS228_PGM/blob/master/exam/final040407.pdf) 

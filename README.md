@@ -22,7 +22,7 @@ BOOK : [Probabilistic Graphical Models: Principles and Techniques by Daphne Koll
 
 <b> Homework (70%) + Final Exam (30%) </b>| Homework - Theoretical + Programming | Topics in [book](https://github.com/SKKSaikia/CS228_PGM/blob/master/book.PNG)
 
-# [HomeworkS](https://github.com/SKKSaikia/CS228_PGM/tree/master/hw)
+# [Homeworks](https://github.com/SKKSaikia/CS228_PGM/tree/master/hw)
 
 - [Homework 1](https://github.com/SKKSaikia/CS228_PGM/blob/master/hw/hw1.pdf) : [Programming](https://github.com/SKKSaikia/CS228_PGM/tree/master/hw/hw1)
 - [Homework 2](https://github.com/SKKSaikia/CS228_PGM/blob/master/hw/hw2.pdf) : [Programming](https://github.com/SKKSaikia/CS228_PGM/tree/master/hw/hw2)

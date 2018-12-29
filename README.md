@@ -24,25 +24,37 @@ BOOK : [Probabilistic Graphical Models: Principles and Techniques by Daphne Koll
 
 # [COURSE](https://ermongroup.github.io/cs228-notes/)
 
-<h2><b> ♞ INTRODUCTION </b></h2>
+<h2><b> ♞ PRELIMINARIES </b></h2>
 
-𓁅 Overview of course, Optimization [ [slide1p](https://github.com/SKKSaikia/CS221_AI/blob/master/slides/overview.pdf) ], [ [slide6p](https://github.com/SKKSaikia/CS221_AI/blob/master/slides/overview-6pp.pdf) ] <br/>
+- Introduction: What is probabilistic graphical modeling? Overview of the course. <br/>
+- Review of probability theory: Probability distributions. Conditional probability. Random variables (under construction). <br/>
+- Examples of real-world applications: Image denoising. RNA structure prediction. Syntactic analysis of sentences. Optical character recognition (under construction). <br/>
 
-<h2><b> ♞ INTRODUCTION </b></h2>
+<h2><b> ♞ REPRESENTATION </b></h2>
 
-𓁅 Overview of course, Optimization [ [slide1p](https://github.com/SKKSaikia/CS221_AI/blob/master/slides/overview.pdf) ], [ [slide6p](https://github.com/SKKSaikia/CS221_AI/blob/master/slides/overview-6pp.pdf) ] <br/>
+- Bayesian networks: Definitions. Representations via directed graphs. Independencies in directed models. <br/>
+- Markov random fields: Undirected vs directed models. Independencies in undirected models. Conditional random fields. <br/>
 
-<h2><b> ♞ INTRODUCTION </b></h2>
+<h2><b> ♞ INFERENCE </b></h2>
 
-𓁅 Overview of course, Optimization [ [slide1p](https://github.com/SKKSaikia/CS221_AI/blob/master/slides/overview.pdf) ], [ [slide6p](https://github.com/SKKSaikia/CS221_AI/blob/master/slides/overview-6pp.pdf) ] <br/>
+- Variable elimination The inference problem. Variable elimination. Complexity of inference. <br/>
+- Belief propagation: The junction tree algorithm. Exact inference in arbitrary graphs. Loopy Belief Propagation. <br/>
+- MAP inference: Max-sum message passing. Graphcuts. Linear programming relaxations. Dual decomposition. <br/>
+- Sampling-based inference: Monte-Carlo sampling. Importance sampling. Markov Chain Monte-Carlo. Applications in inference. <br/>
+- Variational inference: Variational lower bounds. Mean Field. Marginal polytope and its relaxations. <br/>
 
-<h2><b> ♞ INTRODUCTION </b></h2>
+<h2><b> ♞ LEARNING </b></h2>
 
-𓁅 Overview of course, Optimization [ [slide1p](https://github.com/SKKSaikia/CS221_AI/blob/master/slides/overview.pdf) ], [ [slide6p](https://github.com/SKKSaikia/CS221_AI/blob/master/slides/overview-6pp.pdf) ] <br/>
+- Learning in directed models: Maximum likelihood estimation. Learning theory basics. Maximum likelihood estimators for Bayesian networks. <br/>
+- Learning in undirected models: Exponential families. Maximum likelihood estimation with gradient descent. Learning in CRFs <br/>
+- Learning in latent variable models: Latent variable models. Gaussian mixture models. Expectation maximization. <br/>
+- Bayesian learning: Bayesian paradigm. Conjugate priors. Examples (under construction). <br/>
+- Structure learning: Chow-Liu algorithm. Akaike information criterion. Bayesian information criterion. Bayesian structure learning (under construction). <br/>
 
-<h2><b> ♞ INTRODUCTION </b></h2>
+<h2><b> ♞ BRINGING IT ALL TOGETHER </b></h2>
 
-𓁅 Overview of course, Optimization [ [slide1p](https://github.com/SKKSaikia/CS221_AI/blob/master/slides/overview.pdf) ], [ [slide6p](https://github.com/SKKSaikia/CS221_AI/blob/master/slides/overview-6pp.pdf) ] <br/>
+- The variational autoencoder: Deep generative models. The reparametrization trick. Learning latent visual representations. <br/>
+- List of further readings: Structured support vector machines. Bayesian non-parametrics. <br/>
 
 # FINAL EXAM
 

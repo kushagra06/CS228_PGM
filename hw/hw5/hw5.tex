@@ -1,0 +1,448 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage,enumitem,amsmath,amssymb,graphicx}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{bbm}
+
+\begin{document}
+
+\begin{center}
+{\Large CS 228 Winter 2018 Homework 5}
+
+\begin{tabular}{rl}
+SUNet ID: & 05794739 \\
+Name: & Luis Perez \\
+Collaborators: & \\
+Late Days: & 0
+\end{tabular}
+\end{center}
+
+By turning in this assignment, I agree by the Stanford honor code and declare
+that all of this is my own work.
+
+\section*{Problem 1}
+
+\begin{enumerate}[label=(\alph*)]
+  \item We wish to compute the Bayesian predictive probability of the described process using a Dirichlet prior. This is relatively straight-forward.
+
+  \begin{align*}
+  	P(X[M+1] = x^i \mid \mathcal{D}) &= \int_\theta P(X[M+1] = x^i, \theta \mid \mathcal D)d\theta \tag{integrate over all possible values of $\theta$} \\
+  	&= \int_\theta P(X[M+1] = x^i \mid \theta, \mathcal{D})P(\theta \mid \mathcal{D}) d\theta \tag{Chain Rule} \\
+  	&= \int_\theta P(X[M+1] = x^i \mid \theta)P(\theta \mid \mathcal{D}) \tag{$X \perp \mathcal{D} \mid \theta$} \\
+  	&= \int_\theta \theta_i P(\theta \mid \mathcal{D}) \tag{definition of $P(X=x^k \mid \theta)$}\\
+  	&= E_{\theta \sim P(\theta \mid \mathcal{D})}[\theta_i] 
+  \end{align*}
+  Therefore the problem simply boils down to figure out what form $P(\theta \mid D)$ takes. We note that:
+  $$
+  	P(\theta \mid D) \propto P(D \mid \theta) P(\theta)
+  $$
+  where $P(\theta)$ is a Dirichlet prior (ie, $P(\theta) \propto \prod_k \theta_k^{\alpha_k - 1}$) where $\theta \sim Dirichlet(\alpha_1, \cdots, \alpha_K)$. As per the hint, this implies that the posterior distribution $P(\theta \mid \mathcal{D})$ is given by $Dirichlet(\alpha'_1,\cdots,\alpha_K')$ where:
+  $$
+  	\alpha_k' = \alpha_k + \sum_{x[m] \in \mathcal{D}} \mathbbm{1}[x[m] = x^k]
+  $$
+  We therefore have the well-known result:
+  \begin{align*}
+  	E_{\theta \sim Dirichlet(\alpha_1', \cdots \alpha'_K)}[\theta_i] &= \frac{\alpha'_i}{\sum_k \alpha'_k} \\
+  	&= \frac{\alpha_i + \sum_{j=1}^M \mathbbm{1}[x[j] = x^i]}{\sum_k \alpha_k + \sum_k \sum_{j=1}^M \mathbbm{1}[x[j] = x^k]} \\
+  	&= \frac{\alpha_i + M[i]}{\alpha + M} \tag{the bottom just counts the total data samples and the top counts the samples matching $x^i$}
+  \end{align*}
+  The above is exactly what we desired.
+  \item We now show how to compute the Bayesia predictive probability for two samples.
+  \begin{align*}
+  	P(X[M + 2] = x^j, X[M+1] = x^i \mid \mathcal{D}) &= P(X[M+2] \mid D \cup \{X[M+1] = x^i \})P(X[M+1] = x^i \mid \mathcal{D}) \tag{Chain rule where we consider $X[M+1]$ to just be another sample in our dataset} \\
+  	&= \left(\frac{M[j] + \alpha_j}{M + 1+ \alpha}\right)\left(\frac{M[i] + \alpha_i}{M + \alpha}\right) \tag{In the case where $i \neq j$} \\
+  	&= \left(\frac{M[i] + 1 + \alpha_i}{M + 1+ \alpha}\right)\left(\frac{M[i] + \alpha_i}{M + \alpha}\right) \tag{In the case where $i = j$}
+  \end{align*}
+  The above can be some simple because the posterior of the Dirichlet with a categorical likelihood is another Dirichlet, so we treat drawing the second sample simply as if we had had the first sample as part of our original dataset. Then the results follow directly from the result in part (a).
+
+  \item Suppose that instead of computing the above we wish to use the approximation where we ignore the dependence between $X[M+1]$ and $X[M+2]$. Then we have:
+  \begin{align*}
+  	P(X[M+2] = x^j, X[M+1] = x^i \mid \mathcal{D}) &\approx P([X+1] = x^i \mid \mathcal{D})P(X[M+2] = x^j \mid \mathcal{D}) \\
+  	&= \left(\frac{\alpha_i + M[i]}{M + \alpha}\right)\left(\frac{\alpha_j + M[j]}{M + \alpha}\right) \tag{results from (a)}
+  \end{align*}
+  We now consider the ratio of the approximation to the true probability. For $i = j$ we have:
+  \begin{align*}
+  	\frac{\frac{\alpha_i + M[i]}{M + \alpha}}{\frac{1 + \alpha_i + M[i]}{1 + \alpha + M}} \leq 1 \tag{since $\alpha_i + M[i] \leq \alpha + M$}
+  \end{align*}
+  We can consider two cases. Note that as $M \to \infty$, the ratio is:
+  \begin{align*}
+  	\lim_{M \to \infty} \frac{\frac{\alpha_i + M[i]}{M + \alpha}}{\frac{1 + \alpha_i + M[i]}{1 + \alpha + M}} &= \frac{\frac{\alpha_i + M[i]}{M}}{\frac{1 + \alpha_i + M[i]}{M}} \\
+  	&= \frac{\alpha_i + M[i]}{1 + \alpha_i + M[i]} \\
+  	&= 1 \tag{if we further assume that $x^i$ is generated with a non-zero probability}
+  \end{align*}
+  For small $M$ (ie, let's consider $M = 0$), we have:
+  \begin{align*}
+  \frac{\frac{\alpha_i}{\alpha}}{\frac{1 + \alpha}{1 + \alpha_i}} \leq 1 \tag{since $\alpha_i \leq \alpha$}
+  \end{align*}
+  Next, we consider the case where $i \neq j$. In this scenario, we have the ratio as:
+  \begin{align*}
+  	\frac{1 + \alpha + M}{\alpha + M} = 1 + \frac{1}{\alpha + M} > 1
+  \end{align*}
+  We can consider two cases. Note that as $M \to \infty$, the ratio is:
+  \begin{align*}
+  	\lim_{M \to \infty} 1 + \frac{1}{\alpha + M} &= 1
+  \end{align*}
+  For small $M$ (ie, let's consider $M = 0$), we have:
+  \begin{align*}
+  1 + \frac{1}{\alpha} > 1
+  \end{align*}
+  Therefore, from the above we can draw the following conclusions:
+  \begin{itemize}
+  	\item The more data we have, the closer the approximation is to the correct result. Intuitively, this makes sense, since the more samples we've collected, the more certain we are of our parameters $\theta$, and the less these are influenced by additonal samples. Therefore it becomes the case that the drawn samples will be independent.
+  	\item The fewer the samples, the more strongly our prior affects our approximation. If we have very strong priors (large $\alpha_k$), then the closer our approximation is to the reality. If we have very weak priors and very few samples, then our approximation will be further from the true result.
+  	\item In the case where we have few samples and weak priors, we note that our approximation is an under-estimate when $i = j$, and an over-estimates when $i \neq j$. Intuitively, this makes sense. If we have very weak priors and very little data and we sample $x^i$, then Bayesian, then we will believe that $x^i$ is very likely and will therefore assign high probability to sampling it again (compare this to our approximation, which ignores the fact we saw $x^i$ and will therefore under-estimate the probability of $x^i$ being sampled again). By a similar argument, with weak priors and few samples, if we see $x^i$, Bayesian theory will have use decrease the probabilities of seeing other values $x^j$ for $j \neq i$. However, our approximation will ignore this and will therefore over-estimate.
+  \end{itemize}
+
+\end{enumerate}
+
+\section*{Problem 2}
+
+\begin{enumerate}[label=(\Alph*)]
+  \item Gaussian Mixture model
+  	\begin{enumerate}[label=(\roman*)]
+  		\item We can estimate the parameters for our mixture model relatively straight-forward, given the hidden variables $z_ij$. In fact, note that we have the log likelihood over our samples as (WLOG, we number the $5$ known precints as $i=1,\cdots,5$ and we set $\theta = (\pi, mu_0, mu_1, \Sigma_0, \Sigma_1)$.
+  		\begin{align*}
+  			\mathcal{L}(\mathcal{D}, \theta) &= \log P(\mathcal{D} \mid \theta) \\
+  			&=\sum_{i=1}^N \sum_{j=1}^M \log P(X_{ij} = x_{ij}, Z_{ij} = z_{ij}) \\
+  			&=\sum_{i=1}^N \sum_{j=1}^M \log \left[ (1-\pi)^{1-z_{ij}}\pi^{z_{ij}}\mathcal{N}(x_{ij} \mid \mu_{z_{ij}, \Sigma_{z_{ij}}})\right]
+  		\end{align*}
+  		Note that tbe above is not hard to optimzie, since we know the values $z_{ij}$ which tells us exactly which distribution each of the $X_{ij}$ belongs to. In fact, it is a well-known fact (as discussed in lecture) that the optimal parameters are:
+  		\begin{align*}
+  			\pi &= \frac{1}{NM} \sum_{i=1}^N \sum_{j=1}^M z_{ij} \\
+  			\mu_0 &= \frac{\sum_{i=1}^N \sum_{j=1}^M (1 - z_{ij})x_{ij}}{\sum_{i=1}^N \sum_{j=1}^M (1-z_{ij})} \\
+  			\mu_1 &= \frac{\sum_{i=1}^N \sum_{j=1}^M z_{ij} x_{ij}}{\sum_{i=1}^N \sum_{j=1}^M z_{ij}} \\
+  			\Sigma_0 &= \frac{\sum_{i=1}^N \sum_{j=1}^M (1-z_{ij}) (x_{ij} - \mu_0)(x_{ij} - \mu_0)^T}{\sum_{i=1}^N \sum_{j=1}^M (1-z_{ij})} \\
+  			\Sigma_1 &= \frac{\sum_{i=1}^N \sum_{j=1}^M z_{ij} (x_{ij} - \mu_1)(x_{ij} - \mu_1)^T}{\sum_{i=1}^N \sum_{j=1}^M z_{ij}}
+  		\end{align*}
+  		Using the labeled data, we arrive at the following estimates:
+  		\begin{align*}
+  		\pi &: 0.57 \\
+			\mu_0 &: [[-0.99437209, -1.11730233]] \\
+			\mu_1 &: [[1.04922807, 0.98085965]] \\
+			\Sigma_0 &: [[0.30811884, 0.28553768], [0.28553768, 0.81346635]]\\
+			\Sigma_1 &: [[0.77827888,0.19683566],[0.19683566, 0.24996938]]
+		 \end{align*}
+		\item We perform EM on the full data. We use three initializations - the first uses initializations from the parameters calculated in the previous section, and the second uses random initializations. See Figure \ref{fig:2aii} for a plot of the log likelihood over iteration for each initialization.
+
+		The final parameters are:
+		\begin{verbatim}
+				{
+				 'mu_0': matrix([[-1.04960572, -1.02771395]]),
+				 'mu_1': matrix([[0.98435439, 0.99093038]]),
+				 'sigma_0': matrix(
+				 		[[0.35521351, 0.30612163],
+		        [0.30612163, 0.77760628]]
+		     ),
+		     'sigma_1': matrix(
+		     		[[0.72282116, 0.1516442 ],
+		        [0.1516442 , 0.30376521]]
+		      ),
+		      'pi': 0.5881367654479127
+		    }
+				{
+					'mu_0': matrix([[-1.03563056, -0.98534555]]),
+					'mu_1': matrix([[1.00054998, 0.98642068]]),
+					'sigma_0': matrix(
+						[[0.3647824 , 0.33657943],
+				     [0.33657943, 0.86077047]]
+				   ),
+				  'sigma_1': matrix(
+				   	[[0.70784699, 0.15684262],
+				     [0.15684262, 0.30713373]]
+				    ),
+				   'pi': 0.5806319918854072
+				}
+				{
+					'mu_0': matrix([[0.81620805, 0.85773738]]),
+					'mu_1': matrix([[-1.21076696, -1.25595541]]),
+					'sigma_0': matrix(
+						[[0.83972866, 0.30374485],
+				     [0.30374485, 0.47545992]]
+				  ),
+				  'sigma_1': matrix(
+				  	[[0.30972454, 0.17759711],
+				     [0.17759711, 0.54276842]]
+				  ),
+				  'pi': 0.3303282218265587
+				 }
+			\end{verbatim}
+
+			Looking at Figure \ref{fig:2aii}, we note that the random initialization converge relatively quickly, to approximately the same value of the log-likelihood. However, the non-random initialization converges the fastest (within one iteration), which goes to show how much prior knowledge can bring to the table. It essentially means that knowing just a bit of information can significantly help the algorithm achieve a good optimal. The log-likelihood values of the non-random experiments are $[-2608.540223652655, -2572.3551114614665, -2572.3780059575265]$ for each iteration.
+
+			\begin{figure}[h!]
+				\centering
+				\includegraphics{starter/2aii.png}
+				\caption{Log-likelihood of simple mixture of gaussians model for 3 different initializations}
+				\label{fig:2aii}
+			\end{figure}
+
+  	\end{enumerate}
+  \item Geography-aware Mixture Model
+  	\begin{enumerate}[label=(\roman*)]
+  		\item We first explicitly write out the entire log likelihood in terms of our parameters, where we now define $\theta = (\phi, \lambda, \mu_0, \mu_1, \Sigma_0, \Sigma_0)$. We have:
+  		\begin{align*}
+  			\ell\ell(\mathcal{D}\mid \theta) &= \left(\sum_{i=1}^N \sum_{j=1}^M \log \mathcal{N}(x_{ij} \mid \mu_{z_{ij}}, \Sigma_{z_{ij}})\right) \\
+  			&+ \left(\sum_{i=1}^N \sum_{j=1}^M (1 - |z_{ij} - y_i|)\log \lambda + (|z_{ij} - y_i|)\log(1 - \lambda) \right) \\
+  			&+ M\sum_{i=1}^N y_i \log \phi + (1-y_i)\log (1 -\phi)
+  		\end{align*}
+  		We can immediately note the similarity between this log-likelihood and the one from the previous model in Part A. In fact, we note that the estimates $\mu_0, \mu_1, \Sigma_0$ and $\Sigma_1$ will remain unchanged. We can also note that the estimat for $\phi$ is very similar to our estimate for $\pi$ previously, so we have:
+  		$$
+  			\phi = \frac{1}{N}\sum_{i=1}^N y_i
+  		$$
+  		Similary, we have the estimate for $\lambda$ as:
+  		$$
+  			\lambda = \frac{1}{NM} \sum_{i=1}^N \sum_{j=1}^M (1 - |z_{ij} - y_i|)
+  		$$
+  		After running the code with the given labeled data, we find the estimate to be:
+  		\begin{align*}
+				\phi_{MLE} &= 0.6 \\
+				\lambda_{MLE} &= 0.93
+  		\end{align*}
+  		\item We note use the estimated parameters to analyze the unlabeled data to identify precincts that should be targetted by party 1. Specifically, we compute $p(y_i \mid X_{i, 1:M})$ for each precinct $i$ and identify those that exceed $0.5$. We have:
+  		\begin{align*}
+  			p(y_i = 1 \mid x_{i, 1:M}) &= \frac{p(y_i = 1)p(x_{i, 1:M} \mid y_i = 1)}{p(x_{i, 1:M})} \tag{Bayes Rule} \\
+  			&\propto p(y_i = 1) \sum_{z_{i, 1:M}} p(x_{i,1:M} \mid z_{i, 1:M})p(z_{i, 1:M} \mid y_i = 1) \tag{Marginalize out $z_{i, 1:M}$} \\
+  			&\propto p(y_1 = 1) \sum_{z_{i, 1:M}} \prod_{j=1}^M p(x_{ij} \mid z_{ij})p(z_{ij} \mid y_i = 1)  \tag{$x_{ij} \perp x_{ik} \mid z_{ij}$, $x_{ij} \perp z_{ik} \mid z_{ij}$, and $z_{ij} \perp z_{ik} \mid y_i$ for all $k \neq j$} \\
+  			&\propto p(y_i = 1)\prod_{j=1}^M \sum_{z_{ij}} p(x_{ij} \mid z_{ij})p(z_{ij} \mid y_i = 1)
+  		\end{align*}
+  		We compute the above for the unlabeled data and show the results in Table \ref{tab:targets_1}:
+
+  		\begin{table}
+  			\small
+  			\centering
+  			\begin{tabular}{ |c|c|c| } 
+  				\hline
+  			    Index of Precinct & $p(y_{i} = 1 \mid x_{i, 1:M})$ & Should Target \\
+					 \hline
+					   0  & 1.0 & 1 \\
+						 1  & 1.0 & 1 \\
+						 2  & 1.1068754364416026e-11 & 0 \\
+						 3  & 0.999999999999971 & 1 \\
+						 4  & 1.7959922085069583e-16 & 0 \\
+						 5  & 0.9999999999996437 & 1 \\
+						 6  & 0.9999999999999998 & 1 \\
+						 7  & 1.0 & 1 \\
+						 8  & 1.0 & 1 \\
+						 9  & 1.0 & 1 \\
+						 10 &  4.113176092557324e-11 & 0 \\
+						 11 &  2.272105269448472e-09 & 0 \\
+						 12 &  4.7377654114598854e-15 & 0 \\
+						 13 &  0.9999999999999989 & 1 \\
+						 14 &  0.9999999999127415 & 1 \\
+						 15 &  6.6307211160866306e-12 & 0 \\
+						 16 &  1.953301065078507e-14 & 0 \\
+						 17 &  1.0 & 1 \\
+						 18 &  1.0 & 1 \\
+						 19 &  0.9999999999999999 & 1 \\
+						 20 &  2.5869141669354016e-16 & 0 \\
+						 21 &  1.0 & 1 \\
+						 22 &  0.999999999968347 & 1 \\
+						 23 &  2.6585928944052086e-11 & 0 \\
+						 24 &  0.9999999999999918 & 1 \\
+						 25 &  5.717125299640498e-10 & 0 \\
+						 26 &  8.619958633430805e-15 & 0 \\
+						 27 &  3.6809211713034645e-15 & 0 \\
+						 28 &  1.0 & 1 \\
+						 29 &  1.037743486555199e-12 & 0 \\
+						 30 &  1.0 & 1 \\
+						 31 &  1.0 & 1 \\
+						 32 &  0.9999999999999997 & 1 \\
+						 33 &  1.1656312503716846e-11 & 0 \\
+						 34 &  0.9999999999999981 & 1 \\
+						 35 &  2.03129334436899e-12 & 0 \\
+						 36 &  1.0 & 1 \\
+						 37 &  9.353791524423957e-14 & 0 \\
+						 38 &  1.799202714186938e-13 & 0 \\
+						 39 &  0.9999999999999291 & 1 \\
+						 40 &  1.142121877276234e-14 & 0 \\
+						 41 &  0.9999999999998568 & 1 \\
+						 42 &  1.0 & 1 \\
+						 43 &  1.453942213333006e-14 & 0 \\
+						 44 &  0.9999999999999919 & 1 \\
+						 45 &  8.284798658381095e-10 & 0 \\
+						 46 &  0.9999999999866328 & 1 \\
+						 47 &  4.287280573564018e-14 & 0 \\
+						 48 &  0.9999999999748403 & 1 \\
+						 49 &  9.219259677820556e-0 & 0\\
+					 \hline
+				\end{tabular}
+  			\caption{Targetted Precincts for Party 1 Based on Model (A)}
+  			\label{tab:targets_1}
+  		\end{table}
+  		In addition, we compute $p(z_{ij} \mid x_{i, 1:M})$ the affinity of each respondent to each party. We can do this as follows:
+  		\begin{align*}
+  			p(z_{ij} = 1 \mid x_{i, 1:M}) &= \sum_{y_i} p(z_{ij} = 1 \mid y_i, x_{i,1:M})p(y_i \mid x_{i, 1:M}) \tag{marginalize over $y_i$} \\
+  			&= \sum_{y_i} p(z_{ij} = 1 \mid y_i)p(y_i \mid x_{i,1:M}) \tag{$z_{ij} \perp x_{ik} \mid y_i$ for $k \neq j$} \\
+  			&= \sum_{y_i} p(z_{ij} = 1 \mid y_i) \sum_{z_{i,1:M}} p(y_i, z_{i, 1:M} \mid x_{i,1:M}) \tag{Marginalize over $z_{i,1:M}$} \\
+  			&\propto  \sum_{y_i} p(z_{ij} = 1 \mid y_i)p(y_i) \sum_{z_{i, 1:M}} p(x_{i,1:M} \mid y_i, z_{i,1:M})p(z_{i, 1:M} \mid y_i) \tag{Bayes Rule} \\
+  			&\propto \sum_{y_i} p(z_{ij} = 1 \mid y_i)p(y_i) \prod_{j=1}^M \sum_{z_{ij}} p(x_{ij} \mid z_{ij})p(z_{ij} \mid y_i)
+  		\end{align*}
+
+
+  		We note however that the easiest way to compute the above in practice is simply to use the second line, since we have already computed $p(y_i \mid x_{i,1:M}$. We plot the results on a two-dimensional plane and color each entry blue if $p(z_{ij} \mid x_{i, 1:M}) > 0.5$ and red otherwise. Furthermore, we indicate the position of the two guassian means. See Figure \ref{fig:2Bii}: 
+
+  		\begin{figure}[!h]
+  			\includegraphics{starter/2Bii.png}
+  			\caption{Classification of Each Respondant into Groupsbased on their preferences}
+  			\label{fig:2Bii}
+  		\end{figure}
+  		\item we've actually already done most of the derivations for this part of the problem in previous sections. We simply provide a summary here. We first note that:
+	  	\begin{align*}
+	  		p(y_i, z_{i, 1:M} \mid x_{i, 1:M}, \theta) &= \frac{p(x_{i, 1:M} \mid z_{i, 1:M}, \mu_0, \mu_1, \Sigma_0, \Sigma_1)p(z_{i, 1:M} \mid y_i, \lambda)p(y_i \mid \phi)}{p(x_{i, 1:M} \mid \theta)} \tag{Bayes Rule} \\
+	  		&\propto p(y_i \mid \phi)\prod_{j=1}^M p(z_{ij} \mid y_i, \lambda)p(x_{ij} \mid z_{ij}, \mu_0, \mu_1, \Sigma_0, \Sigma_1) \tag{Due to the independence assumptions from the graph} \\
+	  		&\propto \phi^{y_1}(1-\phi)^{1-y_i}\prod_{j=1}^M \lambda^{1-|z_{ij} - y_i|}(1-\lambda)^{|z_{ij} - y_i|}\mathcal{N}(x_{ij} \mid \mu_{z_{ij}}, \Sigma_{z_{ij}})
+	  	\end{align*}
+	  	We note that the above factors quite nicely. However, we also note that we don't need to implement such detail (we have helper functions to do that for us already). Next, we compute the values we're actually interested in. We note that we already showed how to derive these above, so we do not repeat the derivation. We have the below, which we can implement directly since we already have helper functions for most parts:
+	  	\begin{align*}
+	  		p(y_i = 1 \mid x_{i, 1:M}, \theta) &\propto p(y_i = 1\mid \phi) \prod_{j=1}^M\sum_{z_{ij}}p(x_{ij} \mid z_{ij}, \mu_0, \mu_1, \Sigma_0, \Sigma_1)p(z_{ij} \mid y_i = 1, \lambda) \\
+	  		p(z_{ij} = 1 \mid x_{i, 1:M}, \theta) &= \sum_{y_i}p(z_{ij} = 1 \mid y_i, \lambda)p(y_i \mid x_{i, 1:M}, \theta)
+	  	\end{align*}
+  		\item We run the EM algorithm based on the above and plot the log-likelihood for three different initializations. See Figure \ref{fig:2Biv} for the results. We note that for the non-random initialization, we achieve log-likelihood for each iteration of $[-2607.902966433062, -2716.5822361266037, -2716.583264608487]$ which is lower than the log-likelihood achieved from the model in Part (a). This is expected, since for this model, we have more variables but the same amount of data. The final parameters for each initialization are given by:
+	  	\begin{verbatim}
+	  		{
+	  			'pi': 0.57,
+	  			'mu_0': matrix([[-0.58070609, -0.53211384]]),
+	  			'mu_1': matrix([[0.73792493, 0.72178054]]),
+	  			'sigma_0': matrix(
+	  				[[1.13101152, 0.94410317],
+	        	[0.94410317, 1.33282963]]
+	        ),
+	        'sigma_1': matrix(
+	        	[[1.15358039, 0.6844471 ],
+	        	[0.6844471 , 0.90550767]]
+	        ),
+	        'lambda': 0.9300033991815723,
+	        'phi': 0.5599913398162488
+	       }
+				 {
+				 	'pi': 0.8635382287551139,
+				 	'mu_0': matrix([[0.146641, 0.159525]]),
+				 	'mu_1': matrix([[0.146641, 0.159525]]),
+				 	'sigma_0': matrix(
+				 		[[1.57352898, 1.20983373],
+	        	[1.20983373, 1.48599977]]
+	        ),
+	        'sigma_1': matrix(
+	        	[[1.57352898, 1.20983373],
+	        	[1.20983373, 1.48599977]]
+	        ),
+	        'lambda': 0.12577219079635513,
+	        'phi': 4.813683538003169e-15
+	       }
+				 {
+				 	'pi': 0.27365474262398237,
+				 	'mu_0': matrix([[0.14664098, 0.15952498]]),
+				 	'mu_1': matrix([[0.14664101, 0.15952501]]),
+				 	'sigma_0': matrix(
+				 		[[1.57352898, 1.20983374],
+	        	[1.20983374, 1.48599979]]
+	        ),
+	        'sigma_1': matrix(
+	        	[[1.57352898, 1.20983373],
+	        	[1.20983373, 1.48599977]]
+	        ),
+	        'lambda': 0.612194424069675,
+	        'phi': 0.9998477583843295
+	       }
+
+	  	\end{verbatim}
+
+	  	\begin{figure}[h!]
+	  	\centering
+	  	\includegraphics{starter/2Biv.png}
+	  	\caption{Log-likelihood Geographical-aware mixture of gaussians model with three distinct initializations.}
+	  	\label{fig:2Biv}
+	  	\end{figure}
+
+	  	\item We note that the parameters yielding the highest log-likelihood are those estimated from the real, visible data. We use these parameters to classify target precincts, as well as identify the political leaning of everyone surveyed.
+
+	  	The parameters used for initialization are:
+	  	\begin{align*}
+	  		\pi &= 0.57 \\
+				\mu_0 &= [[-0.58070609,-0.53211384]] \\
+				\mu_1 &= [[0.73792493, 0.72178054]]\\
+				\sigma_0 &= [[1.13101152, 0.94410317],
+				 [0.94410317,1.33282963]] \\
+				\sigma_1 &= [[1.15358039,0.6844471 ],
+				 [0.6844471,0.90550767]] \\
+				\lambda &= 0.9300033991815723 \\
+				\phi &= 0.5599913398162488
+	  	\end{align*}
+
+
+	  	The results for the target precints are presented in Table \ref{tab:targets_2}.
+
+			\begin{table}
+				\small
+				\centering
+				\begin{tabular}{ |c|c|c| } 
+					\hline
+				    Index of Precinct & $p(y_{i} = 1 \mid x_{i, 1:M})$ & Should Target \\
+					 \hline
+					  0 & 0.9999999761447184 & 1 \\
+						1 & 0.9999999976681156 & 1 \\
+						2 & 4.1642095825431577e-07 & 0 \\
+						3 & 0.9999561451144368 & 1 \\
+						4 & 6.510163155155151e-09 & 0 \\
+						5 & 0.9999317493963904 & 1 \\
+						6 & 0.9999999901314645 & 1 \\
+						7 & 0.9999999490387573 & 1 \\
+						8 & 0.9999999461386037 & 1 \\
+						9 & 0.9999999998084497 & 1 \\
+						10 &  1.753488633084377e-07 & 0 \\
+						11 &  1.1369890316452593e-06 & 0 \\
+						12 &  1.7851423001534098e-09 & 0 \\
+						13 &  0.9999996965006349 & 1 \\
+						14 &  0.9998578186734897 & 1 \\
+						15 &  9.748460406660177e-08 & 0 \\
+						16 &  1.648330293429426e-11 & 0 \\
+						17 &  0.9999999246474265 & 1 \\
+						18 &  0.9999999997017036 & 1 \\
+						19 &  0.9999998385422671 & 1 \\
+						20 &  4.722503826228951e-10 & 0 \\
+						21 &  0.9999999978598132 & 1 \\
+						22 &  0.999668991045038 & 1 \\
+						23 &  8.490281458847395e-08 & 0 \\
+						24 &  0.9999999371020845 & 1 \\
+						25 &  5.388141958763265e-06 & 0 \\
+						26 &  3.2747775600008553e-09 & 0 \\
+						27 &  8.027057517125992e-10 & 0 \\
+						28 &  0.9999999965264651 & 1 \\
+						29 &  3.4376917788820625e-10 & 0 \\
+						30 &  0.9999999999567194 & 1 \\
+						31 &  0.9999999639951135 & 1 \\
+						32 &  0.9999997585578096 & 1 \\
+						33 &  1.809478604025113e-07 & 0 \\
+						34 &  0.9999999076903715 & 1 \\
+						35 &  1.3462185445974097e-07 & 0 \\
+						36 &  0.9999999951844862 & 1 \\
+						37 &  6.830491441231028e-09 & 0 \\
+						38 &  7.885263404231153e-09 & 0 \\
+						39 &  0.9999930295758916 & 1 \\
+						40 &  1.5811263038702554e-09 & 0 \\
+						41 &  0.9999890628446244 & 1 \\
+						42 &  0.999999877444418 & 1 \\
+						43 &  3.0295000348713675e-07 & 0 \\
+						44 &  0.9999999111630276 & 1 \\
+						45 &  9.276313455970333e-06 & 0 \\
+						46 &  0.9998462758417149 & 1 \\
+						47 &  4.982129691779141e-10 & 0 \\
+						48 &  0.9999803999783657 & 1 \\
+						49 &  0.0003271418283425953 & 0  \\
+					 \hline
+				\end{tabular}
+				\caption{Targetted Precincts for Party 1 Based on Model (B)}
+				\label{tab:targets_2}
+			\end{table}
+
+	  	\begin{figure}[h!]
+	  	\centering
+	  	\includegraphics{starter/2Bv.png}
+	  	\caption{Classification of Individuals into groups based on preferences.}
+	  	\label{fig:2Bv}
+	  	\end{figure}
+	  \end{enumerate}
+\end{enumerate}
+
+\end{document}

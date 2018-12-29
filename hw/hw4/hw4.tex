@@ -1,0 +1,355 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage,enumitem,amsmath,amssymb,graphicx}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{bbm}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\begin{document}
+
+\begin{center}
+{\Large CS 228 Winter 2018 Homework 4}
+
+\begin{tabular}{rl}
+SUNet ID: & 05794739 \\
+Name: & Luis Perez \\
+Collaborators: & \\
+Late Days: & 0
+\end{tabular}
+\end{center}
+
+By turning in this assignment, I agree by the Stanford honor code and declare
+that all of this is my own work.
+
+\section*{Problem 1}
+
+\begin{enumerate}[label=(\alph*)]
+  \item We compute the acceptable probability for each MH step. We first introduce some notation to make things easier. Let $C$ a random vector consisting of $C_1, \cdots, C_K$ (ie, it corresponds to one particular assignment of correspondance variables) such that $Val(C) = perm(\{1,\cdots, K\})$ where $perm$ returns all possible permutations of the input set. Let $v$ be a random vector corresponding to $v_1, \cdots, v_k$ such that $Val(v) = \{a_1, \cdots, a_L\}^K$.
+
+  We will use MH to approximate sampling from the distribution $P(C = c\mid v = a)$. Our proposal distribution will be $Q(C = c' \mid C = c, v = a)$ which randomly selects two indexes of $c$ (uniformly) and swaps ther values.
+
+  With the previous definition, have
+  \begin{align*}
+  	A(x' \mid x) &= A(c' \mid c) \\
+  	&= \min \left\{1, \frac{P(C = c' \mid v = a)Q(C = c \mid C = c', v = a)}{P(C = c \mid v = a)Q(C = c' \mid C = c, v = a)} \right\}
+  \end{align*}
+
+  We first note that $Q(C = c' \mid C = c, v = a) = Q(C = c \mid C = c', v = a)$. The reasoning is obvious, since the probability of going from assignment $c' \to c$ is exactly equal to the probability of going from $c \to c'$ since we would need to swap the same two indexes $i$ and $j$. We can thefore simplify the term in the min to:
+  \begin{align*}
+  	\frac{P(C = c' \mid v = a)}{P(C = c \mid v = a)} &= \frac{\frac{P(v= a \mid C = c')P(C = c')}{P(v = a)}}{\frac{P(v= a \mid C = c)P(C = c)}{P(v = a)}} \tag{Bayes Rule} \\
+  	&= \frac{P(v = a \mid C = c')P(C = c')}{P(v = a \mid C = c)P(C = c)} \tag{Normalization Cancels}\\
+  	&= \frac{P(v = a \mid C = c')}{P(v = a \mid C = c)}\tag{We assume uniform prior over all possible assignments, so $P(C = c') = P(C = c)$} \\
+  	&= \frac{P(v_1 = a_1, \cdots, v_K = a_K \mid C_1 = c'_1, \cdots, C_K = c'_K)}{P(v_1 = a_1, \cdots, v_K = a_K \mid C_1 = c_1, \cdots, C_K = c_K)} \\
+  	&= \frac{\prod_{i=1}^K P_i(v_i = a_i \mid C_i = c'_i )}{\prod_{i=1}^K P_i(v_i = a_i \mid C_i = c_i )} \tag{We assume that $\forall i,j \in [1,\cdots, K], v_i \perp v_j \mid C_1, \cdots, C_K$ and $v_i \perp C_j \mid C_i$} \\
+  	&= \frac{P_i(v_i = a_i \mid C_i = c_j)P_j(v_j = a_j \mid C_j = c_i)}{P_i(v_i = a_i \mid C_i = c_i)P_j(v_j = a_j \mid C_j = c_j)} \tag{Since we know that $c'$ and $c$ differ only by the swapped $i,j$ assigments}
+  \end{align*}
+  We note that it is reasonable to assume $\forall i,j \in [1,\cdots, K], v_i \perp v_j \mid C_1, \cdots, C_K$ since given all of the correspondances for the observations, they are independent. Furthermore, it makes sense to $v_i \perp C_j \mid C_i$, since knowing the object to which measurement $v_i$ corresponds, the measurement is then independent from the other assignments. From the above, we arrive at the final equation for the acceptance probability of assignments $c'$ where we picked variables $C_i$ and $C_j$ to be swapped:
+  \begin{align*}
+  A(c' \mid c) &= \min\left\{1, \frac{P_i(v_i = a_i \mid C_i = c_j)P_j(v_j = a_j \mid C_j = c_i)}{P_i(v_i = a_i \mid C_i = c_i)P_j(v_j = a_j \mid C_j = c_j)} \right\}
+  \end{align*}
+
+  \item Once we have run the MH sampler for a long time (the burn-in period), when we collect the $M$ samples $C_1[m], \cdots, C_k[m]$, we expect these to be samples from the true distribution $P(C = c \mid v = a)$. Therefore, to estimate the marginal $P(C_i = c_i \mid v = a)$, we can directly use a Monte Carlo estimate.
+  \begin{align*}
+  	P(C_i = c_i \mid v = a) &= \sum_{c_{-i}} P(C_i = c_i, C_{i-1} = c_{-i}) \\
+  	&= \sum_{c_i} \mathbbm{1}[C_i = c_i]P(C_1 = c_1, \cdots, C_K = c_k) \\
+  	&= E_{P(C \mid v)}[g(c)] \tag{Where $g(c) = \mathbbm{1}[C_i = c_i]$}\\
+  	&\approxeq \frac{1}{M} \sum_{m = 1}^M g(C_1[m], \cdots, C_K[m]) \\
+  	&= \frac{\#\text{ samples with }C_i = c_i}{M}
+  \end{align*}
+  \item The naive version of Gibbs sampling would not directly work. Gibbs sampling where we sample one variable by holding all others fixed. It is just a special case of MH where the proposal distribution would look like: 
+  $$
+  	Q(C_i = c_i' \mid C_{i} = c_i, C_{-i} = c_{-i}, v= a) = P(C_i = c_i' \mid C_{-i} = c_{-i} ,v=a)
+  $$
+  However, due to the mutext constraints on the $C_i$ variables, the above would simply give us:
+  $$
+  P(C_i = x \mid C_{-i} = c_{-i} ,v=a) = \begin{cases} 
+      1 & x = c_i \\
+      0 & x \neq c_i 
+   \end{cases}
+	$$
+	which means we will never move to a different configuration. Basically, leaving all $C_i$ fixed but one necessarily forces that $C_i$ to be the only unassigned value. We could modify Gibbs sampling so that we leave all $C_i$ fixed except $2$, but this is not the typical proposal distribution people have in mind when they discuss Gibbs sampling.
+\end{enumerate}
+
+\pagebreak
+\section*{Problem 2}
+
+\begin{enumerate}[label=(\alph*)]
+  \item We write down the full objective function in terms of $f_i$ and $\theta_i$. This is simply an exercise in symbol manipulation.
+  \begin{align*}
+  	g(\vect{\theta}; \mathcal{D}) &= (1-\alpha)\ell_{\vect{Y}\mid \vect{X}}(\vect{\theta}; \mathcal{D}) + \alpha\ell_{\vect{X}\mid\vect{Y}}(\vect{\theta}; \mathcal{D}) \\
+  	&= (1- \alpha)\log \prod_{m=1}^M P_{\theta}(\vect{x}^m \mid \vect{y}^m) + \alpha \log \prod_{m=1}^M P_{\theta}(\vect{y}^m \mid \vect{x}^m) \\
+  	&= (1- \alpha)\sum_{m=1}^M \log P_{\theta}(\vect{x}^m \mid \vect{y}^m) + \alpha \sum_{m=1}^M \log P_{\theta}(\vect{y}^m \mid \vect{x}^m)
+  \end{align*}
+  Let us define the following, to simplify notation:
+  \begin{align*}
+  	Z_{\vect{y}^m} &= \sum_{\vect{x}} \exp\left(\sum_{i =1}^n \theta_i f_i(\vect{x}_i, \vect{y}^m_i)\right) = Z\sum_{\vect{x}} P(\vect{x}, \vect{y}) \\
+  	Z_{\vect{x}^m} &= \sum_{\vect{y}} \exp\left(\sum_{i =1}^n \theta_i f_i(\vect{x^m}_i, \vect{y}_i)\right) = Z\sum_{\vect{y}} P(\vect{x}, \vect{y}) \\
+  	Z &= \sum_{\vect{x}, \vect{y}} \exp\left(\sum_{i=1}^n \theta_i f_i(\vect{x}_i, \vect{y}_i)\right)
+  \end{align*}
+  Now, let us focus on one part of the above (the other can be similarly simplified). 
+  \begin{align*}
+  	\log P_{\theta}(\vect{x}^m \mid \vect{y}^m) &= \log P_{\theta}(\vect{x}^m, \vect{y}^m) - \log P_{\theta}(\vect{y}^m) \tag{Bayes Rule} \\
+  	&= \log P_{\theta}(\vect{x}^m, \vect{y}^m) - \log \left(\sum_{\vect{x}} P_{\theta}(\vect{x}, \vect{y}^m)\right)\\
+  	&= \log P_{\theta}(\vect{x}^m, \vect{y}^m) - \log Z_{\vect{y}^m} \\
+  	&= \log \exp(\sum_{i=1}^n \theta_i f_i(\vect{x}^m_i, \vect{y}^m_i)) - \log Z - \log Z_{\vect{y}^m} \\
+  	&= \sum_{i=1}^n \theta_i f_i (\vect{x}_i^m, \vect{y}_i^m) - \log Z - \log Z_{\vect{y}^m}
+  \end{align*}
+  Similarly we have:
+  $$
+		\log P_{\theta}(\vect{y}^m \mid \vect{x}^m) = \sum_{i=1}^n \theta_i f_i (\vect{x}_i^m, \vect{y}_i^m) - \log Z - \log Z_{\vect{x}^m}
+  $$
+  Plugging into our original equation and subtituting back our definitions to obtain the fully expanded form:
+  \begin{align*}
+  	g(\vect{\theta}; \mathcal{D}) &= (1- \alpha)\sum_{m=1}^M \log P_{\theta}(\vect{x}^m \mid \vect{y}^m)  + \alpha \sum_{m=1}^M  \log P_{\theta}(\vect{y}^m \mid \vect{x}^m) \\
+  	&= (1- \alpha)\sum_{m=1}^M \left[\sum_{i=1}^n \theta_i f_i (\vect{x}_i^m, \vect{y}_i^m) - \log Z - \log Z_{\vect{y}^m}\right]  \\
+  	&+ \alpha \sum_{m=1}^M \left[\sum_{i=1}^n \theta_i f_i (\vect{x}_i^m, \vect{y}_i^m) - \log Z - \log Z_{\vect{x}^m}\right] \\
+  	&= -M\log Z  + \sum_{m=1}^M \left[\sum_{i=1}^n \theta_i f_i(\vect{x}_i^m, \vect{y}_i^m) - (1-\alpha) \log Z_{\vect{y}^m} - \alpha \log Z_{\vect{x}^m} \right] \\
+  	&= -M \log \left(\sum_{\vect{x}, \vect{y}} \exp\left(\sum_{i=1}^n \theta_i f_i(\vect{x}_i, \vect{y}_y)\right) \right) \\
+  	&+ \sum_{m=1}^M \sum_{i=1}^n \theta_i f_i(\vect{x}_i^m, \vect{y}_i^m) \\
+  	&- (1-\alpha) \sum_{m=1}^M \log \left(\sum_{\vect{x}} \exp\left(\sum_{i =1}^n \theta_i f_i(\vect{x}_i, \vect{y^m}_i)\right)\right) \\
+  	&- \alpha \sum_{m=1}^M \log \left(\sum_{\vect{y}} \exp\left(\sum_{i =1}^n \theta_i f_i(\vect{x^m}_i, \vect{y}_i)\right) \right)
+  \end{align*}
+  \item We are interested in computing the derivative $\frac{\partial}{\partial \theta_i}$. Again, this is just an exercise in symbol manipulation. We first note the following relations:
+  \begin{align*}
+  	\frac{\partial \log Z_{\vect{y}^m}}{\partial \theta_i} &= \frac{1}{Z_{\vect{y}^m}} \sum_{\vect{x}} \frac{\partial}{\partial \theta_i} \exp\left(\sum_{i =1}^n \theta_i f_i(\vect{x}_i, \vect{y}^m_i)\right) \\
+  	&= \frac{1}{Z_{\vect{y}^m}} \sum_{\vect{x}} f_i(\vect{x}_i, \vect{y}_i^m) \exp\left(\sum_{i =1}^n \theta_i f_i(\vect{x}_i, \vect{y}^m_i)\right)  \\
+  	&= \sum_{\vect{x}} f_i(\vect{x}_i, \vect{y}_i^m) \frac{\exp\left(\sum_{i =1}^n \theta_i f_i(\vect{x}_i, \vect{y}^m_i)\right) }{Z_{\vect{y}^m}} \\
+  	&= E_{P_{\vect{\theta}}(\vect{X} \mid \vect{Y} = \vect{y}^{m})}[f_i(\vect{x}_i, \vect{y}_i^m)]
+  \end{align*}
+  Similarly, we have:
+  $$
+  	\frac{\partial\log Z_{\vect{x}^m}}{\partial \theta_i}  = E_{P_{\vect{\theta}}(\vect{Y} \mid \vect{X} = \vect{x}^{m})}[f_i(\vect{x}_i^m, \vect{y}_i)]
+  $$
+  And lastly, we have:
+  \begin{align*}
+  	\frac{\partial \log Z}{\partial \theta_i} &= \frac{1}{Z} \sum_{\vect{x}, \vect{y}} \frac{\partial}{\partial \theta_i} \exp\left(\sum_{i =1}^n \theta_i f_i(\vect{x}_i, \vect{y}_i)\right) \\
+  	&= \frac{1}{Z} \sum_{\vect{x}, \vect{y}} f_i(\vect{x}_i, \vect{y}_i) \exp\left(\sum_{i =1}^n \theta_i f_i(\vect{x}_i, \vect{y}_i)\right)  \\
+  	&= \sum_{\vect{x}, \vect{y}} f_i(\vect{x}_i, \vect{y}_i) \frac{\exp\left(\sum_{i =1}^n \theta_i f_i(\vect{x}_i, \vect{y}_i)\right) }{Z} \\
+  	&= E_{P_{\vect{\theta}}(\vect{X}, \vect{Y})}[f_i(\vect{x}_i, \vect{y}_i)]
+  \end{align*}
+  Putting the above together, we have:
+  \begin{align*}
+  	\frac{\partial }{\partial \theta_i}g(\vect{\theta};D) &= -M\frac{\partial }{\partial \theta_i} \log Z + \sum_{m=1}^M\left[ \sum_{i=1}^n \frac{\partial }{\partial \theta_i} \theta_i f_i(\vect{x}_i^m, \vect{y}_i^m) - (1-\alpha)\frac{\partial }{\partial \theta_i} \log Z_{\vect{y}^m} - \alpha \frac{\partial }{\partial \theta_i}\log Z_{\vect{x}^m} \right] \\
+  	&= \sum_{i=1}^M f_i(\vect{x}_i^m, \vect{y}_i^m) \\
+  	&- ME_{P_{\vect{\theta}}(\vect{X}, \vect{Y})}[f_i(\vect{x}_i, \vect{y}_i)] \\
+  	&- (1-\alpha)\sum_{m=1}^M E_{P_{\vect{\theta}}(\vect{X} \mid \vect{Y} = \vect{y}^{m})}[f_i(\vect{x}_i, \vect{y}_i^m)] \\
+  	&- \alpha\sum_{m=1}^M E_{P_{\vect{\theta}}(\vect{Y} \mid \vect{X} = \vect{x}^{m})}[f_i(\vect{x}_i^m, \vect{y}_i)] \\
+  	&= M\hat{E}[f_i(\vect{x}_i^m, \vect{y}_i^m)] \tag{Sample Mean} \\
+  	&- ME_{P_{\vect{\theta}}(\vect{X}, \vect{Y})}[f_i(\vect{x}_i, \vect{y}_i)] \tag{True Mean}\\
+  	&- (1-\alpha)\sum_{m=1}^M E_{P_{\vect{\theta}}(\vect{X} \mid \vect{Y} = \vect{y}^{m})}[f_i(\vect{x}_i, \vect{y}_i^m)] \tag{Conditional Expectation $X \mid Y$}\\
+  	&- \alpha\sum_{m=1}^M E_{P_{\vect{\theta}}(\vect{Y} \mid \vect{X} = \vect{x}^{m})}[f_i(\vect{x}_i^m, \vect{y}_i)] \tag{Condtional Expectation $Y \mid X$}
+  \end{align*}
+\end{enumerate}
+
+\pagebreak
+\section*{Problem 3}
+
+\begin{enumerate}[label=(\alph*)]
+	\item We show that the EM algorithm converges in one iteration and we give a closed form expression for the parameter values at this point. In other words, we give a closed form expressions for $\theta_c^1$ and $\theta^1_{x_i} \mid c$. We initialize the algorithm by setting:
+	$$
+		\theta_c^0 = \frac{1}{|Val(C)|}, \theta_{x_i \mid c}^0 = \frac{1}{|Val(X_i)|}
+	$$
+	In our case, the missing data is $c$, therefore, we begin with the $E$ step where we ``hallucinate'' the possible values of $c$ given each of our training examples. For each example $\vect{x}[m]$, we compute:
+	\begin{align*}
+		Q^1(C = c \mid X = x[m]) &= P(C = c \mid X = x[m], \theta^0_c, \theta^0_{x_1 \mid c}, \cdots, \theta^0_{x_n \mid c}) \\
+		&= \frac{P(X = x[m] \mid C = c, \theta^0_{x_1}, \cdots,\theta^0_{x_n})P(C \mid \theta^0_c)}{\sum_{c} P(X = x[m] \mid C = c, \theta^0_{x_1}, \cdots, \theta^0_{x_n})P(C \mid \theta^0_c)} \tag{Bayes Rule and Conditional Independence} \\
+		&= \frac{\prod_i P(X_i = x_i[m] \mid C = c, \theta^0_{x_i})P(C \mid \theta_c^0)}{\sum_c \prod_i P(X_i = x_i[m] \mid C = c, \theta^0_{x_i})P(C \mid \theta_c^0)} \\
+		&= \frac{\prod_i \frac{1}{|Val(X_i)|} \frac{1}{|Val(C)|}}{\sum_c \prod_i \frac{1}{|Val(X_i)|} \frac{1}{|Val(C)|}} \\
+		&= \frac{\frac{1}{|Val(C)|}\prod_i \frac{1}{|Val(X_i)|}}{\prod_i \frac{1}{|Val(X_i)|} \sum_c \frac{1}{|Val(C)|}} \\
+		&= \frac{\frac{1}{|Val(C)|}}{\sum_c \frac{1}{|Val(C)|}} \\
+		&= \frac{1}{|Val(C)|}
+	\end{align*}
+	The next step is simply to maximize the expectation of the log likelihood over these ``hallucinated'' values for each data point. That is to say, we have the objective function:
+	\begin{align*}
+		f^1(\theta) &= \sum_{m=1}^M E_{Q^1(C = c \mid X = x[m])}[\log P(x[m], c; \theta)] \\
+		&= \sum_{m=1}^M E_{c \sim Uniform(\frac{1}{|Val(C)|})}[\log P(x[m], c; \theta)] \\
+    &= \frac{1}{|Val(C)|}\sum_{m=1}^M\sum_{c} \log P(x[m], c; \theta) \\
+    &= \frac{1}{|Val(C)|}\sum_{m=1}^M\sum_{c} [\log \theta_c + \sum_{i=1}^n \log \theta_{x[m]_i \mid c}] \\
+    &= \frac{M}{|Val(C)|}\sum_{c} \log \theta_c + \frac{1}{|Val(C)|}\sum_{m=1}^M\sum_c\sum_{i=1}^n \log \theta_{x[m]_i \mid c}
+	\end{align*}
+	And we wish to compute:
+	$$
+		\theta^1 = \arg\max_{\theta} f^1(\theta)
+	$$
+	subject to the constraints $\sum_{c} \theta_c = 1$ and $\forall c, \sum_{x_i} \theta_{x_i \mid c} = 1$.
+
+  We can do the above by taking derivates and setting equal to the derivate of the lagrange constraints (represented by $\mathcal{L})$. This gives us $|Val(C)| + 1$ equations on $|Val(C) + 1|$ variables of the form:
+  \begin{align*}
+    \frac{\partial}{\partial \theta_c} \mathcal{L}(\theta. \lambda) &=  \frac{M}{|Val(C)|}\frac{1}{\theta_c} - \lambda_0 = 0\\
+    \frac{\partial}{\partial \lambda_0} \mathcal{L}(\theta, \lambda) &=1- \sum_{c}\theta_c = 0 \\
+    \implies \frac{M}{|Val(C)|}\sum_c \frac{1}{\lambda_0} &= 1 \\
+    \implies \lambda_0 &= M \\
+    \implies \theta_c^1 &= \frac{1}{|Val(C)|}
+  \end{align*}
+  We note that this leaves the distribution over $c$ unchanged. We can do something similar for each of the $\theta_{x[m]_i \mid c}$. We first note that:
+  $$
+    \sum_{m=1}^M \sum_c \sum_{i=1}^n \log \theta_{x[m]_i \mid c} = \sum_c \sum_{i=1}^n N_{\mathcal{D}}(x_i) \log\theta_{x_i \mid c}
+  $$
+  Where $N_{\mathcal{D}}(x_i)$ is simply the number of times that the value $x_i$ appears in our dataset $\mathcal{D}$. With the above, we have for each $c \in C$ a total of $|Val(X)| + 1$ equations on $|Val(X)| + 1$ unknowns, as below:
+  \begin{align*}
+    \frac{\partial}{\partial \theta_{x_i \mid c}} \mathcal{L}(\theta, \lambda) &= \frac{N_{\mathcal{D}}(x_i)}{|Val(C)|} \frac{1}{\theta_{x_i \mid c}} - \lambda_c = 0 \\
+    \frac{\partial}{\partial \lambda_c} &= 1 - \sum_{x_i} \theta_{x_i \mid c} = 0 \\
+    \implies \frac{1}{|Val(C)|}\sum_{x_i} N_{\mathcal{D}}(x_i)\frac{1}{\lambda_c} &= 1 \\
+    \implies \lambda_c &= \frac{M}{|Val(C)|} \\
+    \implies \theta_{x_i \mid c}^1 &= \frac{N_{\mathcal{D}(x_i)}}{M} = \frac{\sum_{m=1}^M \mathbbm{1}[x[m]_x == x_i]}{M}
+  \end{align*}
+  Which means we basically update $\theta_{x_i \mid c}$ to be equal to precisely the proportion of occurrences of $x_i$ in the data $\mathcal{D}$.
+
+  We claim that the above is the convergence point for the algorithm. To see this, suppose we attempted to do an $E$ step, with our updated values of $\theta^1_{x_i \mid c}$. Then the very first thing to note is that $\theta^1_{x_i} \mid c$ do not depend, on any way, in the value of $c$. Therefore, we'll have:
+  \begin{align*}
+    Q^2(C = c \mid X = x[m]) &= \frac{P(X = x[m] \mid C = c; \theta^1)P(C=c; \theta^1)}{\sum_{c'} P(X = x[m] \mid C=c'; \theta^1)} \\
+    &= \frac{P(X = x[m]; \theta^1)P(C = c;\theta^1_c)}{P(X = x[m])\sum_c P(C = c; \theta^1_c)} \tag{Since our $P(X = x[m])$ does not depend on the value of $c$} \\
+    &= \frac{1}{|Val(C)|}
+  \end{align*}
+  We therefore have $Q^2((C = c \mid X = x[m]) = Q^1(C = c \mid X = x[m])$, which implies that $f^2 = f^1$ (since the data does not change). Therefore, we will have $theta^2 = \theta^1$. We therefore note that with this initiaization, the algorithm converges in one step and has the final paramters as specified previously.
+
+\end{enumerate}
+
+\pagebreak
+\section*{Problem 4}
+
+\begin{enumerate}[label=(\alph*)]
+\item We derive the expression for the condtional probability of the pixel $(i,j)$ is back given its Markov Blanket. In other words, we compute $p(y_{ij} = 1 \mid y_{M_(i,j)})$ where $y_{M(i,j)}$ denotes the Markov blanket. We also introduce the notation $y_{\bar{M}(i,j)}$ to mean all variables not in the Markov blanket and not $y_{ij}$, Note that we have $y_{M(i,j)} = \{x_{ij}, y_{N(i,j)}\}$ where $y_{N(i,j)}$ denotes the neighboring pixels of $y_{i,j}$. Furthermore, let $E \setminus (i,j)$ denote the set of all edges excluding edges where $(i,j)$ is an endpoint. Furthermore, for $((i,j), (i',j')) = e \in E$, denote $e_1 = (i,j)$ and $e_2 = (i',j')$. Wih the above notation out of the way, we have:
+\begin{align*}
+&p(y_{ij} = 1 \mid y_{M(i,j)}) \\
+&= p(y_{ij} = 1 \mid x_{ij}, y_{N(i,j)}) \\
+&= \frac{\sum_{\bar{M}(i,j)} p(y_{ij} = 1, x_{ij}, y_{N(i,j)}, y_{\bar{M}(i,j)}) }{\sum_{y_{ij}}\sum_{\bar{M}(i,j)} p(y_{ij}, x_{ij}, y_{N(i,j)}, y_{\bar{M}(i,j)}} \\
+&= \frac{\frac{1}{Z} \exp[\eta x_{ij}] \prod_{y_{i'j'} \in y_{N(i,j)}} \exp[\beta y_{i'j'}] \sum_{\bar{M}(i,j)}\prod_{n \neq i}\prod_{m \neq j}\exp[\eta y_{nm}x_{nm}] \prod_{e \in E \setminus (i,j)} \exp[\beta y_{e_1}y_{e_2}] }{\frac{1}{Z} \sum_{y_{ij}} \exp[\eta y_{ij}x_{ij}] \prod_{y_{i'j'} \in y_{N(i,j)}} \exp[\beta y_{ij}y_{i'j'}] \sum_{\bar{M}(i,j)}\prod_{n \neq i}\prod_{m \neq j}\exp[\eta y_{nm}x_{nm}] \prod_{e \in E \setminus (i,j)} \exp[\beta y_{e_1}y_{e_2}]} \\
+&= \frac{\exp [\eta x_{ij} + \beta \sum_{y_{i'j'} \in y_{N(i,j)}} y_{i'j'}]}{\exp [\eta x_{ij} + \beta \sum_{y_{i'j'} \in y_{N(i,j)}} y_{i'j'}] + \exp [-\eta x_{ij} - \beta \sum_{y_{i'j'} \in y_{N(i,j)}} y_{i'j'}]} \\
+&= \frac{\exp (2[\eta x_{ij} + \beta \sum_{y_{i'j'} \in y_{N(i,j)}} y_{i'j'}])}{\exp (2[\eta x_{ij} + \beta \sum_{y_{i'j'} \in y_{N(i,j)}} y_{i'j'}]) + 1} \\
+&= \sigma(2\eta x_{ij} + 2\beta\sum_{y_{i'j'} \in y_{N(i,j)}} y_{i'j'})
+\end{align*}
+Where we define $\sigma(x) = \frac{e^x}{1 + e^x}$.
+Being explicity, we have the following two results. For $i \not\in \{1,N\}, j \not\in \{1,M\}$:
+\begin{align*}
+	p(y_{ij} = 1 \mid y_{M(i,j)}) &= p(y_{ij} = 1 \mid y_{i-1, j}, y_{i, j-1}, y_{i+1, j}, y_{i, j + 1}, x_{ij}) \\
+	&= \sigma(2\beta[y_{i-1,j} + y_{i, j-1} + y_{i+1,j}+y_{i,j+1}] + 2\eta x_{ij})
+\end{align*}
+and for $i \in \{1,N\}, j \in \{1, M\}$:
+\begin{align*}
+	p(y_{11} = 1 \mid y_{M(1,1)}) &= p(y_{11} = 1 \mid y_{21}, y_{12}, x_{11}) \\
+	&= \sigma(2\beta[y_{21}+y_{12}] + 2\eta x_{11}) \\
+	p(y_{NM} = 1 \mid y_{M(1,1)}) &= p(y_{NM} = 1 \mid y_{N-1, M}, y_{N, M-1}, x_{NM}) \\
+	&= \sigma(2\beta[y_{N-1, M}+y_{N, M-1}] + 2\eta x_{NM}) \\
+	p(y_{1M} = 1 \mid y_{M(1,M)}) &= p(y_{1M} = 1 \mid y_{1, M-1}, y_{2M}, x_{1M}) \\
+	&= \sigma(2\beta[y_{1, M-1} + y_{2M}] + 2\eta x_{1M}) \\
+	p(y_{N1} = 1 \mid y_{M(N,1)}) &= p(y_{N1} = 1 \mid y_{N-1, 1}, y_{N2}, x_{N1}) \\
+	&= \sigma(2\beta[y_{N-1,1} +y_{N2}] + 2\eta x_{N1}) \\
+	p(y_{1j} = 1 \mid y_{M(1,j)}) &= p(y_{1j} = 1 \mid y_{2j}, y_{1,j+1}, y_{1, j-1} x_{1j}) \\
+	&= \sigma(2\beta[y_{2j}+y_{1,j+1} + y_{1, j-1}] + 2\eta x_{1j}) \tag{$j \neq 1,M$} \\
+	p(y_{i1} = 1 \mid y_{M(i,1)}) &= p(y_{i1} = 1 \mid y_{i-1, 1}, y_{i+1, 1}, y_{i, 2}, x_{i1}) \\
+	&= \sigma(2\beta[y_{i-1, 1}+y_{i+1, 1} + y_{i,2}] + 2\eta x_{i1} \tag{$i \neq 1, N$}) \\
+	p(y_{iM} = 1 \mid y_{M(i,M)}) &= p(y_{iM} = 1 \mid y_{i, M-1}, y_{i+1, M}, y_{i-1, M}, x_{iM}) \\
+	&= \sigma(2\beta[y_{i, M-1} + y_{i+1, M} + y_{i-1, M}] + 2\eta x_{iM}) \tag{$i \neq 1, N$} \\
+	p(y_{Nj} = 1 \mid y_{M(N,j)}) &= p(y_{Nj} = 1 \mid y_{N-1, j}, y_{N, j+1}, y_{N, j-1}, x_{Nj}) \\
+	&= \sigma(2\beta[y_{N-1,j} +y_{N, j+1} + y_{N, j - 1}] + 2\eta x_{Nj}) \tag{$j \neq 1, M$}
+\end{align*}
+
+\item We outline the Gibbs sampling algorithm in pseudo-code that samples from $p(\vect{y} \mid \vect{x})$.
+	\begin{itemize}
+		\item Set $\vect{x}$ to the observed values. 
+		\item Initialize $\vect{y}$ to be equal to $\vect{x}$ (in theory, we could use any initialization, but it seems ``sensible'' to start with a ``good'' guess -- in this case, the corrupted image should be ``close'' to the real image, so it's a decent guess to start).
+		\item For $B$ steps:
+			\begin{itemize}
+				\item For $i \gets 1$ to $i = N$
+				 	\begin{itemize}
+				 		\item For $j \gets 1$ to $i = M$
+				 			\begin{itemize}
+				 				\item Compute $2\eta \vect{x}_{ij} + 2\beta\sum_{\vect{y}_{i'j'} \in \vect{y}_{N(i,j)}} \vect{y}_{i'j'}$. This can be done by summing the values of each neighbor of pixel $(i,j)$ (according to $\vect{y}$), doubling the result and multiplying by $\beta$, and then adding the value of $2\eta x_{ij}$. Note that each pixel has at most four neighbors, so this calculation takes a constant amount of work.
+				 				\item Run the result from above through the $\sigma$ function -- again, this takes constant time. Let this result be $p_{ij}$.
+				 				\item Generate a random sample $r \sim Uniform(0,1)$.
+				 				\item If $r \leq p_{ij}$, update $\vect{y}_{ij} = 1$. Otherwise, set $\vect{y}_{ij} = -1$. Note that we do a mutation of $\vect{y}$, so this value will persist.
+				 			\end{itemize}
+				 	\end{itemize}
+			\end{itemize}
+		\item Repeat for $s \geq 1$ to $S$:
+			\begin{itemize}
+				\item Allocate space for $\vect{y[s]}$ (ie, a vector of size $NxM$).
+				\item For $i \gets 1$ to $i = N$
+				 	\begin{itemize}
+				 		\item For $j \gets 1$ to $i = M$
+				 			\begin{itemize}
+				 				\item Repeat the corresponding first three steps from above to generate $r, p_{ij}$. Note that we still use $\vect{x}$ and $\vect{y}$.
+				 				\item If $r \leq p_{ij}$, set $\vect{y[s]}_{ij} = 1$. Otherwise, set $\vect{y[s]}_{ij} = -1$. We do NOT mutate $\vect{y}$ (though, technically, since we're assuming we've converged, mutating it should not make a difference)
+				 			\end{itemize}
+				 	\end{itemize}
+			\end{itemize}
+		\item Return the $S$ samples $\vect{y[s]}$ generated above.
+	\end{itemize}
+
+	We note that by construction, the stationary distribution of our Markov Process above is $p(\vect{y} \mid \vect{x})$. Therefore, it is straightforward to ensure that the above process will actually generate samples from $p(\vect{y} \mid \vect{x})$ for large enough values of $B$. We simply need to ensure that the chain is ergodic to guarantee convergence.
+
+	We note that to ensure irreducibility, we simply need to guarantee that we can potentially move to any state of the vector $\vect{y}$. We note that this immediately follows from the fact that $p(y_{ij} = 1 \mid y_{M(i,j)}) = \sigma(...)$, since this guarantees that $0 < p(y_{ij} = 1 \mid y_{M(i,j)}) < 1$. Therefore it is possible to transition from any state $\vect{y}$ to any other state $\vect{y}'$.
+
+	To ensure the chain is aperiodic, we note that for any state $\vect{y}$, there is always a non-zero probability that we will change non of its values (for similar reasons outlined above), and therefore the chain has a period of $1$ (aperiodic).
+
+	With the above, we know the chain is ergodic, and therefore by construction, we know that the equilibrium distribution is in fact the posterior distributions $p(\vect{y} \mid \vect{x})$.
+
+\item We implement the above algorutnm and apply it to the image with $20\%$, using values of $\eta = 1, \beta = 1, B = 100, S = 1000$. On each iteration, we compute $E(\vect{y}, \vect{x})$. We run the algorithm with three distinct initializations of $y_ij$. (1) same as $x_{ij}$, (2) negative of $x_{ij}$ and (3) random. We plot these values in Figure \ref{fig:log_energies}.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.5]{programming/log_same.png}
+\includegraphics[scale=0.5]{programming/log_neg.png}
+\includegraphics[scale=0.5]{programming/log_rand.png}
+\caption{Enery Value per Iteration for Three Distinct Initializations.}
+\label{fig:log_energies}
+\end{figure}
+
+From the figure, we can tell that all three initializations appear to be converging to the same energy region in the posterior (some state with $E(\vect{x}, \vect{y}) \approxeq -214000$. The burn-in appears to be adequate in length for all of the initializations -- especially the ``same'' and ``random''. The ``negative'' initialization is the one where there might be some additional benefit to increases $S$, but the very last few iterations already appear to have converged. The burn-in appears to be adequate in length, as there's a sharp decrease in enery that appears to level towards the end. We can see that there's substantial mixing only in the ``same'' initialization -- this continues when sampling, which appears to be a good sign since we are sampling the entire posterior instead of having just a single mode. For ``rand'' and ``neg'' initializations, it appears that the chain is not mixing as well. We see very little fluctiation from iteration to iteration once convergence is achieved. Intuitively, this likely means that we're sampling from a single mode, rather than the entire distribution over $p$.
+
+\item We restore the noisy images (10\% and 20\% noise) and present the results in Figure \ref{fig:denoised_10} (for 10\%) and Figure \ref{fig:denoised_20} (for 20\%). For the 10\$, we achieve restoration error of 0.65102796965765515\%. For the 20\% we achieve a restoration error of 1.2810173334735907\%.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.33]{programming/orig.png}
+\includegraphics[scale=0.33]{programming/noisy_10.png}
+\includegraphics[scale=0.33]{programming/denoised_10.png}
+\caption{Results of denoising a noisy image. The left-most figure is the original, the middle image has each pixel flipped in color with ten-percent chance, and the right-most image is the denoised image (using the algorithm from above).}
+\label{fig:denoised_10}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.33]{programming/orig.png}
+\includegraphics[scale=0.33]{programming/noisy_20.png}
+\includegraphics[scale=0.33]{programming/denoised_20.png}
+\caption{Results of denoising a noisy image. The left-most figure is the original, the middle image has each pixel flipped in color with twenty-percent chance, and the right-most image is the denoised image (using the algorithm from above).}
+\label{fig:denoised_20}
+\end{figure}
+
+\item We repeat the process from above but using the dumb restoration process. The results are in Figure \ref{fig:denoised_dumb_10} (for 10\%) and Figure \ref{fig:denoised_dumb_20} (for 20\%). For the 10\%, we achieve restoration error of 0.7246630901036736\%. For the 20\% we achieve a restoration error of 2.2967144710543848\%. The Gibbs sampler appears to do much better than the dumb method. The reason for this is likely due to the deterministic nature of the dumn method -- it simply takes the majority from the neighbors. Therefore, with enough noise, it's very difficult to get rid of the black pixels since a large number of the neighbors will also be black.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.33]{programming/orig.png}
+\includegraphics[scale=0.33]{programming/noisy_10.png}
+\includegraphics[scale=0.33]{programming/denoised_dumb_10.png}
+\caption{Results of denoising a noisy image using the dumb method. The left-most figure is the original, the middle image has each pixel flipped in color with ten-percent chance, and the right-most image is the denoised image.}
+\label{fig:denoised_dumb_10}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.33]{programming/orig.png}
+\includegraphics[scale=0.33]{programming/noisy_20.png}
+\includegraphics[scale=0.33]{programming/denoised_dumb_20.png}
+\caption{Results of denoising a noisy image using the dumb method. The left-most figure is the original, the middle image has each pixel flipped in color with twenty-percent chance, and the right-most image is the denoised image.}
+\label{fig:denoised_dumb_20}
+\end{figure}
+
+\item We use the Gibbs sampler to estimate the posterior for the number of pizels the letter $z$ takes up. The resulting histograms are shown in Figure \ref{fig:frequency_z}. We note that the two distributions are different in a few ways. First, the means are lower for the 10\% reconstruction. Similary, the min and max are also lower for the 10\% reconstruction. This makes a lot of sense since the reconstruction is closer to the original, which means it more accurately measures the Z without any noisy whie pixels (ie, white pixels turned black). We would expect the noisier image to have more black. Furthermore, we note that the noiser version of the distribution is smoother (appears a bit more normal). I suspect this is due to the fact that the image is noiser, so the distribution of pixels is more normal.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.5]{programming/f_10.png}
+\includegraphics[scale=0.5]{programming/f_20.png}
+\caption{Distribution of number of black pixels in the "Z" region. The left figure is for the reconstruction from the ten percent corrupted image and the right figure is for the reconstruction from the twenty percent reconstructed image.}
+\label{fig:frequency_z}
+\end{figure}
+
+
+\end{enumerate}
+\end{document}

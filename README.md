@@ -2,7 +2,7 @@
 
 <img src="https://github.com/SKKSaikia/CS228_PGM/blob/master/cs228.PNG">
 
-Probabilistic graphical models are a powerful framework for representing complex domains using probability distributions, with numerous applications in machine learning, computer vision, natural language processing and computational biology. Graphical models bring together graph theory and probability theory, and provide a flexible framework for modeling large collections of random variables with complex interactions. This course will provide a comprehensive survey of the topic, introducing the key formalisms and main techniques used to construct them, make predictions, and support decision-making under uncertainty.
+<p align="justify"> Probabilistic graphical models are a powerful framework for representing complex domains using probability distributions, with numerous applications in machine learning, computer vision, natural language processing and computational biology. Graphical models bring together graph theory and probability theory, and provide a flexible framework for modeling large collections of random variables with complex interactions. This course will provide a comprehensive survey of the topic, introducing the key formalisms and main techniques used to construct them, make predictions, and support decision-making under uncertainty.</p>
 
 The aim of this course is to develop the knowledge and skills necessary to design, implement and apply these models to solve real problems. The course will cover: 
 - (1) Bayesian networks, undirected graphical models and their temporal extensions
@@ -26,30 +26,30 @@ BOOK : [Probabilistic Graphical Models: Principles and Techniques by Daphne Koll
 
 <h2><b> ♞ PRELIMINARIES </b></h2>
 
-- Introduction: What is probabilistic graphical modeling? Overview of the course. <br/>
-- Review of probability theory: Probability distributions. Conditional probability. Random variables (under construction). <br/>
-- Examples of real-world applications: Image denoising. RNA structure prediction. Syntactic analysis of sentences. Optical character recognition (under construction). <br/>
+- [Introduction](): What is probabilistic graphical modeling? Overview of the course. <br/>
+- [Review of probability theory](): Probability distributions. Conditional probability. Random variables (under construction). <br/>
+- [Examples of real-world applications](): Image denoising. RNA structure prediction. Syntactic analysis of sentences. Optical character recognition (under construction). <br/>
 
 <h2><b> ♞ REPRESENTATION </b></h2>
 
-- Bayesian networks: Definitions. Representations via directed graphs. Independencies in directed models. <br/>
-- Markov random fields: Undirected vs directed models. Independencies in undirected models. Conditional random fields. <br/>
+- [Bayesian networks](): Definitions. Representations via directed graphs. Independencies in directed models. <br/>
+- [Markov random fields](): Undirected vs directed models. Independencies in undirected models. Conditional random fields. <br/>
 
 <h2><b> ♞ INFERENCE </b></h2>
 
-- Variable elimination The inference problem. Variable elimination. Complexity of inference. <br/>
-- Belief propagation: The junction tree algorithm. Exact inference in arbitrary graphs. Loopy Belief Propagation. <br/>
-- MAP inference: Max-sum message passing. Graphcuts. Linear programming relaxations. Dual decomposition. <br/>
-- Sampling-based inference: Monte-Carlo sampling. Importance sampling. Markov Chain Monte-Carlo. Applications in inference. <br/>
-- Variational inference: Variational lower bounds. Mean Field. Marginal polytope and its relaxations. <br/>
+- [Variable elimination](): The inference problem. Variable elimination. Complexity of inference. <br/>
+- [Belief propagation](): The junction tree algorithm. Exact inference in arbitrary graphs. Loopy Belief Propagation. <br/>
+- [MAP inference](): Max-sum message passing. Graphcuts. Linear programming relaxations. Dual decomposition. <br/>
+- [Sampling-based inference](): Monte-Carlo sampling. Importance sampling. Markov Chain Monte-Carlo. Applications in inference. <br/>
+- [Variational inference](): Variational lower bounds. Mean Field. Marginal polytope and its relaxations. <br/>
 
 <h2><b> ♞ LEARNING </b></h2>
 
-- Learning in directed models: Maximum likelihood estimation. Learning theory basics. Maximum likelihood estimators for Bayesian networks. <br/>
-- Learning in undirected models: Exponential families. Maximum likelihood estimation with gradient descent. Learning in CRFs <br/>
-- Learning in latent variable models: Latent variable models. Gaussian mixture models. Expectation maximization. <br/>
-- Bayesian learning: Bayesian paradigm. Conjugate priors. Examples (under construction). <br/>
-- Structure learning: Chow-Liu algorithm. Akaike information criterion. Bayesian information criterion. Bayesian structure learning (under construction). <br/>
+- [Learning in directed models](): Maximum likelihood estimation. Learning theory basics. Maximum likelihood estimators for Bayesian networks. <br/>
+- [Learning in undirected models](): Exponential families. Maximum likelihood estimation with gradient descent. Learning in CRFs <br/>
+- [Learning in latent variable models](): Latent variable models. Gaussian mixture models. Expectation maximization. <br/>
+- [Bayesian learning](): Bayesian paradigm. Conjugate priors. Examples (under construction). <br/>
+- [Structure learning](): Chow-Liu algorithm. Akaike information criterion. Bayesian information criterion. Bayesian structure learning (under construction). <br/>
 
 <h2><b> ♞ BRINGING IT ALL TOGETHER </b></h2>
 

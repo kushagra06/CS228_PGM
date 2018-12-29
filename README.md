@@ -26,35 +26,35 @@ BOOK : [Probabilistic Graphical Models: Principles and Techniques by Daphne Koll
 
 <h2><b> ♞ PRELIMINARIES </b></h2>
 
-- [Introduction](): What is probabilistic graphical modeling? Overview of the course. <br/>
-- [Review of probability theory](): Probability distributions. Conditional probability. Random variables (under construction). <br/>
-- [Examples of real-world applications](): Image denoising. RNA structure prediction. Syntactic analysis of sentences. Optical character recognition (under construction). <br/>
+- [Introduction](https://ermongroup.github.io/cs228-notes/preliminaries/introduction/): What is probabilistic graphical modeling? Overview of the course. <br/>
+- [Review of probability theory](https://ermongroup.github.io/cs228-notes/preliminaries/probabilityreview/): Probability distributions. Conditional probability. Random variables (under construction). <br/>
+- [Examples of real-world applications](https://ermongroup.github.io/cs228-notes/preliminaries/applications/): Image denoising. RNA structure prediction. Syntactic analysis of sentences. Optical character recognition (under construction). <br/>
 
 <h2><b> ♞ REPRESENTATION </b></h2>
 
-- [Bayesian networks](): Definitions. Representations via directed graphs. Independencies in directed models. <br/>
-- [Markov random fields](): Undirected vs directed models. Independencies in undirected models. Conditional random fields. <br/>
+- [Bayesian networks](https://ermongroup.github.io/cs228-notes/representation/directed/): Definitions. Representations via directed graphs. Independencies in directed models. <br/>
+- [Markov random fields](https://ermongroup.github.io/cs228-notes/representation/undirected/): Undirected vs directed models. Independencies in undirected models. Conditional random fields. <br/>
 
 <h2><b> ♞ INFERENCE </b></h2>
 
-- [Variable elimination](): The inference problem. Variable elimination. Complexity of inference. <br/>
-- [Belief propagation](): The junction tree algorithm. Exact inference in arbitrary graphs. Loopy Belief Propagation. <br/>
-- [MAP inference](): Max-sum message passing. Graphcuts. Linear programming relaxations. Dual decomposition. <br/>
-- [Sampling-based inference](): Monte-Carlo sampling. Importance sampling. Markov Chain Monte-Carlo. Applications in inference. <br/>
-- [Variational inference](): Variational lower bounds. Mean Field. Marginal polytope and its relaxations. <br/>
+- [Variable elimination](https://ermongroup.github.io/cs228-notes/inference/ve/): The inference problem. Variable elimination. Complexity of inference. <br/>
+- [Belief propagation](https://ermongroup.github.io/cs228-notes/inference/jt/): The junction tree algorithm. Exact inference in arbitrary graphs. Loopy Belief Propagation. <br/>
+- [MAP inference](https://ermongroup.github.io/cs228-notes/inference/map/): Max-sum message passing. Graphcuts. Linear programming relaxations. Dual decomposition. <br/>
+- [Sampling-based inference](https://ermongroup.github.io/cs228-notes/inference/sampling/): Monte-Carlo sampling. Importance sampling. Markov Chain Monte-Carlo. Applications in inference. <br/>
+- [Variational inference](https://ermongroup.github.io/cs228-notes/inference/variational/): Variational lower bounds. Mean Field. Marginal polytope and its relaxations. <br/>
 
 <h2><b> ♞ LEARNING </b></h2>
 
-- [Learning in directed models](): Maximum likelihood estimation. Learning theory basics. Maximum likelihood estimators for Bayesian networks. <br/>
-- [Learning in undirected models](): Exponential families. Maximum likelihood estimation with gradient descent. Learning in CRFs <br/>
-- [Learning in latent variable models](): Latent variable models. Gaussian mixture models. Expectation maximization. <br/>
-- [Bayesian learning](): Bayesian paradigm. Conjugate priors. Examples (under construction). <br/>
-- [Structure learning](): Chow-Liu algorithm. Akaike information criterion. Bayesian information criterion. Bayesian structure learning (under construction). <br/>
+- [Learning in directed models](https://ermongroup.github.io/cs228-notes/learning/directed/): Maximum likelihood estimation. Learning theory basics. Maximum likelihood estimators for Bayesian networks. <br/>
+- [Learning in undirected models](https://ermongroup.github.io/cs228-notes/learning/undirected/): Exponential families. Maximum likelihood estimation with gradient descent. Learning in CRFs <br/>
+- [Learning in latent variable models](https://ermongroup.github.io/cs228-notes/learning/latent/): Latent variable models. Gaussian mixture models. Expectation maximization. <br/>
+- [Bayesian learning](https://ermongroup.github.io/cs228-notes/learning/bayesianlearning/): Bayesian paradigm. Conjugate priors. Examples (under construction). <br/>
+- [Structure learning](https://ermongroup.github.io/cs228-notes/learning/structLearn/): Chow-Liu algorithm. Akaike information criterion. Bayesian information criterion. Bayesian structure learning (under construction). <br/>
 
 <h2><b> ♞ BRINGING IT ALL TOGETHER </b></h2>
 
-- The variational autoencoder: Deep generative models. The reparametrization trick. Learning latent visual representations. <br/>
-- List of further readings: Structured support vector machines. Bayesian non-parametrics. <br/>
+- [The variational autoencoder](https://ermongroup.github.io/cs228-notes/extras/vae/): Deep generative models. The reparametrization trick. Learning latent visual representations. <br/>
+- [List of further readings](https://ermongroup.github.io/cs228-notes/extras/readings/): Structured support vector machines. Bayesian non-parametrics. <br/>
 
 # FINAL EXAM
 

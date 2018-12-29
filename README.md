@@ -18,7 +18,7 @@ BOOK : [Probabilistic Graphical Models: Principles and Techniques by Daphne Koll
 𓊖 [Bayesian Reasoning and Machine Learning by David Barber](https://github.com/SKKSaikia/CS228_PGM/blob/master/books/Bayesian%20Reasoning%20and%20Machine%20Learning%20by%20David%20Barber.pdf) <br/>
 𓊖 [Graphical models, exponential families, and variational inference](https://github.com/SKKSaikia/CS228_PGM/blob/master/Graphical%20models%2C%20exponential%20families%2C%20and%20variational%20inference%20by%20Martin%20J.%20Wainwright%20and%20Michael%20I.%20Jordan.pdf) <br/>
 
-### Homework (70%) + Final Exam (30%) | Homework - Theoretical + Programming part
+<h2><b> Homework (70%) + Final Exam (30%) </h2></b>| Homework - Theoretical + Programming part
 
 # [COURSE](https://ermongroup.github.io/cs228-notes/)
 

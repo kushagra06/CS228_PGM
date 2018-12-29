@@ -1,6 +1,6 @@
 # [CS:228 - Probabilistic Graphical Models](https://cs.stanford.edu/~ermon/cs228/index.html)
 
-PGM ! PGM ! PGM ! One of the most interesting class yet challenging at Stanford is CS228. Graphical Models ahoi!, There's also an online preview of the course, [here](http://scpd.stanford.edu/search/publicCourseSearchDetails.do?method=load&courseId=11761) or [here](https://mvideos.stanford.edu/Previews) , only  the overview lecture though. The course heavily follows Daphne Koller's book [Probabilistic Graphical Models: Principles and Techniques by Daphne Koller and Nir Friedman.](https://github.com/SKKSaikia/CS228_PGM/blob/master/Probabilistic%20Graphical%20Models%20-%20Principles%20and%20Techniques.pdf), and There's also an online version of "Probabilistic Graphical Models" on [Coursera](https://www.coursera.org/specializations/probabilistic-graphical-models). I [completed](https://www.coursera.org/account/accomplishments/specialization/R63SHPRXHBC8) the [online](https://github.com/liang456/Stanford-Probabilistic-Graphical-Models-Coursera) [version](https://github.com/kuo000/stanford-pgm) as a freshman, and here I take CS228 again. Maintain the honor code, keep learning. This is exciting!
+PGM ! PGM ! PGM ! One of the most interesting class yet challenging at Stanford is CS228. Graphical Models ahoi!, There's also an online preview of the course, [here](http://scpd.stanford.edu/search/publicCourseSearchDetails.do?method=load&courseId=11761) or [here](https://mvideos.stanford.edu/Previews) , only  the overview lecture though. The course heavily follows Daphne Koller's book [Probabilistic Graphical Models: Principles and Techniques by Daphne Koller and Nir Friedman.](https://github.com/SKKSaikia/CS228_PGM/blob/master/Probabilistic%20Graphical%20Models%20-%20Principles%20and%20Techniques.pdf), and There's also an online version of "Probabilistic Graphical Models" on [Coursera](https://www.coursera.org/specializations/probabilistic-graphical-models). I [completed](https://www.coursera.org/account/accomplishments/specialization/R63SHPRXHBC8) the [online](https://github.com/liang456/Stanford-Probabilistic-Graphical-Models-Coursera) [version](https://github.com/kuo000/stanford-pgm) as a freshman, and here I take CS228 again. I got [enrolled](https://github.com/SKKSaikia/CS228_PGM/blob/master/gradescope.PNG) on Gradescope, though I am not taking the course in person. Maintain the honor code, keep learning. This is exciting!
 
 <img src="https://github.com/SKKSaikia/CS228_PGM/blob/master/cs228.PNG">
 
@@ -20,7 +20,7 @@ BOOK : [Probabilistic Graphical Models: Principles and Techniques by Daphne Koll
 𓊖 [Bayesian Reasoning and Machine Learning by David Barber](https://github.com/SKKSaikia/CS228_PGM/blob/master/books/Bayesian%20Reasoning%20and%20Machine%20Learning%20by%20David%20Barber.pdf) <br/>
 𓊖 [Graphical models, exponential families, and variational inference](https://github.com/SKKSaikia/CS228_PGM/blob/master/Graphical%20models%2C%20exponential%20families%2C%20and%20variational%20inference%20by%20Martin%20J.%20Wainwright%20and%20Michael%20I.%20Jordan.pdf) <br/>
 
-<b> Homework (70%) + Final Exam (30%) </b>| Homework - Theoretical + Programming
+<b> Homework (70%) + Final Exam (30%) </b>| Homework - Theoretical + Programming | Topics in [book](https://github.com/SKKSaikia/CS228_PGM/blob/master/book.PNG)
 
 # Homework
 

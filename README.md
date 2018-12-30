@@ -65,7 +65,7 @@ BOOK : [Probabilistic Graphical Models: Principles and Techniques by Daphne Koll
 - [List of further readings](https://ermongroup.github.io/cs228-notes/extras/readings/): Structured support vector machines. Bayesian non-parametrics. <br/>
 
 
-유 [PGM - Max Planck Institute for Intelligent Systems - Christopher Bishop](https://www.youtube.com/watch?v=ju1Grt2hdko&list=PLL0GjJzXhAWTRiW_ynFswMaiLSa0hjCZ3) | [CMU - PGM](https://www.youtube.com/watch?v=lcVJ_zsynMc&list=PLI3nIOD-p5aoXrOzTd1P6CcLavu9rNtC-) | [Probabilistic Graphical Models Tutorial — Part 1](https://blog.statsbot.co/probabilistic-graphical-models-tutorial-and-solutions-e4f1d72af189) | [Understanding Probabilistic Graphical Models Intuitively](https://medium.com/@neerajsharma_28983/intuitive-guide-to-probability-graphical-models-be81150da7a) | [CMU - PGM - website](http://www.cs.cmu.edu/~epxing/Class/10708-14/lecture.html) | [PGM](https://cedar.buffalo.edu/~srihari/CSE674/)
+유 [PGM - Max Planck Institute for Intelligent Systems - Christopher Bishop](https://www.youtube.com/watch?v=ju1Grt2hdko&list=PLL0GjJzXhAWTRiW_ynFswMaiLSa0hjCZ3) | [CMU - PGM](https://www.youtube.com/watch?v=lcVJ_zsynMc&list=PLI3nIOD-p5aoXrOzTd1P6CcLavu9rNtC-) | [Probabilistic Graphical Models Tutorial — Part 1](https://blog.statsbot.co/probabilistic-graphical-models-tutorial-and-solutions-e4f1d72af189) | [Understanding Probabilistic Graphical Models Intuitively](https://medium.com/@neerajsharma_28983/intuitive-guide-to-probability-graphical-models-be81150da7a) | [CMU - PGM - website](http://www.cs.cmu.edu/~epxing/Class/10708-14/lecture.html) | [PGM](https://cedar.buffalo.edu/~srihari/CSE674/) | [libDAI](https://staff.fnwi.uva.nl/j.m.mooij/libDAI/) | [OpenGM](http://hciweb2.iwr.uni-heidelberg.de/opengm/)
 
 # FINAL EXAM
 
